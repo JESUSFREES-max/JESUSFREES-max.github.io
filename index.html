@@ -586,13 +586,14 @@
             <p style="font-size:12px; color:#64748b; margin:6px 0 0;">Already a customer? Sign in to the portal with your email to see your quotes, invoices and Rewards credit.</p>
           </div>
           <form id="custRegForm">
-            <div style="margin-bottom:8px;"><label class="lbl">Full Name</label><input id="cRegName" type="text" required placeholder="Jane Doe"></div>
+            <div style="margin-bottom:8px;"><label class="lbl">Full Name</label><input id="cRegName" type="text" placeholder="Jane Doe"></div>
             <div class="grid-2" style="margin-bottom:8px;">
-              <div><label class="lbl">Phone</label><input id="cRegPhone" type="tel" required placeholder="(360) 555-0144"></div>
+              <div><label class="lbl">Phone</label><input id="cRegPhone" type="tel" placeholder="(360) 555-0144"></div>
               <div><label class="lbl">Email</label><input id="cRegEmail" type="text" placeholder="you@email.com"></div>
             </div>
             <div style="margin-bottom:10px;"><label class="lbl">Primary Vehicle (Year/Make/Model or VIN)</label><input id="cRegVeh" type="text" placeholder="2019 Ford F-150"></div>
             <button type="submit" class="btn-navy">Join Redemption Rewards — Free</button>
+            <div style="font-size:12px; color:#64748b; margin-top:6px;">Fill in what you can — every field is optional and the button always works. Name and phone help us most.</div>
           </form>
           <div id="custRegConfirm" class="confirm-box hidden" style="margin-top:10px;">
             <div style="font-size:13px; font-weight:800; color:#14532d;">Rewards Registration Ready!</div>
@@ -609,8 +610,8 @@
         <div class="card-body">
           <form id="techRegForm">
             <div class="grid-2" style="margin-bottom:8px;">
-              <div><label class="lbl">Mechanic Name</label><input id="tRegName" type="text" required placeholder="Full Name"></div>
-              <div><label class="lbl">Phone</label><input id="tRegPhone" type="tel" required placeholder="(360) 555-0188"></div>
+              <div><label class="lbl">Mechanic Name</label><input id="tRegName" type="text" placeholder="Full Name"></div>
+              <div><label class="lbl">Phone</label><input id="tRegPhone" type="tel" placeholder="(360) 555-0188"></div>
             </div>
             <div class="grid-2" style="margin-bottom:8px;">
               <div><label class="lbl">Years Experience / Certs</label><input id="tRegExp" type="text" placeholder="e.g. 8 yrs, ASE A1-A8"></div>
@@ -618,6 +619,7 @@
             </div>
             <div style="margin-bottom:10px;"><label class="lbl">Specialties &amp; Mobile Setup</label><input id="tRegSpec" type="text" placeholder="Diagnostics, Brakes, Diesel, Service Van"></div>
             <button type="submit" class="btn-gold">Apply / Register as Contractor</button>
+            <div style="font-size:12px; color:#64748b; margin-top:6px;">Fill in what you can — every field is optional and the button always works. Name and phone help us most.</div>
           </form>
           <div id="techRegConfirm" class="confirm-box hidden" style="margin-top:10px;">
             <div style="font-size:13px; font-weight:800; color:#14532d;">Contractor Application Ready!</div>
@@ -1057,7 +1059,7 @@
       { id: 'bulbs', cat: 'Maintenance', name: 'Headlight / Bulb Replacement', hrs: 0.25, parts: 25, query: 'headlight bulb' },
       { id: 'jump', cat: 'Roadside Help', name: 'Jump Start Service', hrs: 0.25, parts: 0, query: 'jump starter' },
       { id: 'lockout', cat: 'Roadside Help', name: 'Vehicle Lockout Service', hrs: 0.6667, parts: 0, query: 'lockout kit' },
-      { id: 'fuel', cat: 'Roadside Help', name: 'Emergency Fuel Delivery', hrs: 0.25, parts: 15, query: 'gas can' }
+      { id: 'fuel', cat: 'Roadside Help', name: 'Emergency Fuel Delivery', hrs: 0.25, parts: 15, query: 'gas can' },
       { id: 'bearing', cat: 'Suspension & Steering', name: 'Wheel Bearing Replacement', hrs: 1.5, parts: 140, query: 'wheel hub bearing assembly' },
       { id: 'cv_axle', cat: 'Suspension & Steering', name: 'CV Axle Replacement', hrs: 1.25, parts: 150, query: 'cv axle shaft' },
       { id: 'tie_rod', cat: 'Suspension & Steering', name: 'Tie Rod End Replacement', hrs: 0.75, parts: 70, query: 'tie rod end' },
@@ -1534,9 +1536,9 @@
       e.preventDefault();
       var txt = [
         'REDEMPTION REWARDS REGISTRATION \u2014 REDEMPTION MOBILE SERVICE LLC',
-        'Name: ' + document.getElementById('cRegName').value.trim() + ' (' + document.getElementById('cRegPhone').value.trim() + ')',
-        'Email: ' + document.getElementById('cRegEmail').value.trim(),
-        'Vehicle: ' + document.getElementById('cRegVeh').value.trim(),
+        'Name: ' + (document.getElementById('cRegName').value.trim() || '(not given)') + ' (' + (document.getElementById('cRegPhone').value.trim() || 'no phone given') + ')',
+        'Email: ' + (document.getElementById('cRegEmail').value.trim() || '(not given)'),
+        'Vehicle: ' + (document.getElementById('cRegVeh').value.trim() || '(not given)'),
         'Member perks: invoice copies on request, priority booking, $25 off 3rd visit, free annual battery & safety check'
       ].join('\n');
       document.getElementById('custRegText').textContent = txt;
@@ -1551,10 +1553,10 @@
       e.preventDefault();
       var txt = [
         'CONTRACTOR REGISTRATION — REDEMPTION MOBILE SERVICE LLC',
-        'Name: ' + document.getElementById('tRegName').value.trim() + ' (' + document.getElementById('tRegPhone').value.trim() + ')',
-        'Experience/Certs: ' + document.getElementById('tRegExp').value.trim(),
-        'Service Zips: ' + document.getElementById('tRegZip').value.trim(),
-        'Specialties: ' + document.getElementById('tRegSpec').value.trim()
+        'Name: ' + (document.getElementById('tRegName').value.trim() || '(not given)') + ' (' + (document.getElementById('tRegPhone').value.trim() || 'no phone given') + ')',
+        'Experience/Certs: ' + (document.getElementById('tRegExp').value.trim() || '(not given)'),
+        'Service Zips: ' + (document.getElementById('tRegZip').value.trim() || '(not given)'),
+        'Specialties: ' + (document.getElementById('tRegSpec').value.trim() || '(not given)')
       ].join('\n');
       document.getElementById('techRegText').textContent = txt;
       document.getElementById('techRegConfirm').classList.remove('hidden');
