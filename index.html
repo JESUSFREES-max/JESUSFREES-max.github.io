@@ -717,44 +717,48 @@
       </div>
     </section>
 
-    <section class="card">
-      <div class="card-head">Installed Hybrid Battery Replacement — We Come To You</div>
+        <section class="card">
+      <div class="card-head">Find Your Hybrid Battery — Fitment Checker</div>
       <div class="card-body">
-        <p style="font-size:13px; color:#475569; margin:0 0 12px;">Pack prices below are typical installed ranges (pack + our mobile installation). Your exact quote depends on the tier you choose and your VIN — some model years use two different battery chemistries, so we always confirm fitment by VIN first. The battery warranty is with the pack supplier; our installation labor is covered by our 12-month / 12,000-mile warranty. Core charge is handled through the supplier — no surprises.</p>
-        <div class="grid-3">
+        <p style="font-size:13px; color:#475569; margin:0 0 12px;">Two ways to find the exact battery for your car — use whichever is easier. Either way, De confirms the fit by your full VIN and the old pack&rsquo;s label before anything is ordered, so you never pay for the wrong battery.</p>
+        <div class="grid-3" style="grid-template-columns:1fr 1fr; gap:14px;">
           <div class="pay-card">
-            <img src="https://global.toyota/pages/news/images/2015/09/09/1315/20150909_01_24_s.jpg" alt="Toyota Prius" loading="lazy" onerror="this.style.display='none'" style="width:100%; height:140px; object-fit:cover; border-radius:8px; margin-bottom:10px;">
-            <div style="font-size:14px; font-weight:800; color:#0f2439;">Toyota Prius Gen 2 / Gen 3</div>
-            <div style="font-size:12.5px; color:#64748b; margin:4px 0 8px;">2004–2015 Prius, Prius V &amp; Prius c. The most common hybrid battery job in America.</div>
-            <div style="font-size:13px; font-weight:800; color:#0f2439;">Installed from ~$1,195 – $2,894</div>
-            <div style="font-size:12px; color:#64748b; margin:3px 0 10px;">Reconditioned (1-yr) &rarr; New-module (up to lifetime tiers)</div>
-            <button type="button" class="btn-navy" onclick="hybridQuote('Toyota Prius Gen 2/3')">Get My Installed Quote</button>
+            <div style="font-size:14px; font-weight:800; color:#0f2439;">Option 1 — Look it up by VIN</div>
+            <div style="font-size:12.5px; color:#64748b; margin:4px 0 8px;">Your VIN is on the driver&rsquo;s door jamb or the lower corner of the windshield. We decode it free through the NHTSA federal database.</div>
+            <input id="fitVin" type="text" maxlength="17" placeholder="Paste your 17-character VIN" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; font-size:14px; text-transform:uppercase; box-sizing:border-box;">
+            <div style="margin-top:10px;"><button type="button" class="btn-gold" onclick="fitByVin()">Decode My VIN &amp; Find My Battery</button></div>
           </div>
           <div class="pay-card">
-            <div style="font-size:14px; font-weight:800; color:#0f2439;">Toyota Camry Hybrid / Lexus CT 200h</div>
-            <div style="font-size:12.5px; color:#64748b; margin:4px 0 8px;">Camry, Avalon, Highlander &amp; RAV4 Hybrids and Lexus CT/RX hybrids.</div>
-            <div style="font-size:13px; font-weight:800; color:#0f2439;">Installed from ~$1,300 – $2,800</div>
-            <div style="font-size:12px; color:#64748b; margin:3px 0 10px;">Reconditioned &amp; remanufactured tiers, 1–3 yr pack warranties</div>
-            <button type="button" class="btn-navy" onclick="hybridQuote('Toyota Camry Hybrid / Lexus hybrid')">Get My Installed Quote</button>
-          </div>
-          <div class="pay-card">
-            <div style="font-size:14px; font-weight:800; color:#0f2439;">Honda Civic Hybrid / Insight</div>
-            <div style="font-size:12.5px; color:#64748b; margin:4px 0 8px;">IMA hybrids 2000–2015, plus Ford Escape / Fusion Hybrid.</div>
-            <div style="font-size:13px; font-weight:800; color:#0f2439;">Installed from ~$999 – $2,350</div>
-            <div style="font-size:12px; color:#64748b; margin:3px 0 10px;">Reman from $999 (12-mo) &rarr; new-cell packs (36-mo)</div>
-            <button type="button" class="btn-navy" onclick="hybridQuote('Honda Civic Hybrid / Insight')">Get My Installed Quote</button>
+            <div style="font-size:14px; font-weight:800; color:#0f2439;">Option 2 — Pick your vehicle</div>
+            <div style="font-size:12.5px; color:#64748b; margin:4px 0 8px;">No VIN handy? Just pick your year, make and model.</div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <select id="fitYear" onchange="fitYearChanged()" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; font-size:14px;"><option value="">Year</option></select>
+              <select id="fitMake" onchange="fitMakeChanged()" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; font-size:14px;"><option value="">Make</option></select>
+              <select id="fitModel" onchange="fitModelChanged()" style="padding:10px; border:1px solid #cbd5e1; border-radius:8px; font-size:14px;"><option value="">Model</option></select>
+            </div>
+            <label id="fitHybridWrap" style="display:none; font-size:13px; color:#334155; margin-top:10px;"><input type="checkbox" id="fitHybrid" onchange="fitShowResult()"> Mine is the <strong>Hybrid</strong> version</label>
+            <div style="margin-top:10px;"><button type="button" class="btn-navy" onclick="fitShowResult()">Find My Battery</button></div>
           </div>
         </div>
-        <div class="grid-3" style="margin-top:12px;">
-          <div class="trust-box"><div class="trust-title">Good — Reconditioned</div><div class="trust-sub">Tested modules, weak ones replaced, pack rebalanced. ~$900–$1,500 · 6–18 mo warranty · expect 2–4 more years.</div></div>
-          <div class="trust-box"><div class="trust-title">Better — Remanufactured</div><div class="trust-sub">Fully disassembled, modules matched, wear parts replaced. ~$1,500–$2,600 · 1–3 yr warranty.</div></div>
-          <div class="trust-box"><div class="trust-title">Best — New Modules</div><div class="trust-sub">Brand-new cells in a rebuilt case. ~$1,550–$2,950 · 2–4 yr warranty, lifetime tiers exist · expect 4–6+ years.</div></div>
-        </div>
-        <p style="font-size:12.5px; color:#475569; margin:12px 0 0;">Other hybrids &amp; EVs (Chevy Volt, Nissan, Hyundai/Kia): text us your VIN — <a href="sms:+13607728205" style="color:#0f2439; font-weight:800;">360-772-8205</a> — and we&rsquo;ll price it honestly.</p>
+        <div id="fitResult" style="margin-top:14px;"></div>
       </div>
     </section>
 
     <section class="card">
+      <div class="card-head">Replacement Batteries by Vehicle — Good / Better / Best</div>
+      <div class="card-body">
+        <p style="font-size:13px; color:#475569; margin:0 0 12px;">Prices are pack prices from vetted suppliers (checked November 2026 — they change, so your quote confirms the day&rsquo;s price). Your installed quote adds our mobile installation; our labor carries our 12-month / 12,000-mile warranty, and the pack warranty stays with the supplier shown. Core deposit is handled through the supplier — when we install, we handle the core return for you.</p>
+        <div class="grid-3" style="margin-bottom:12px;">
+          <div class="trust-box"><div class="trust-title">Good — Reconditioned / Reman</div><div class="trust-sub">Tested modules, weak ones replaced, pack rebalanced. Budget-friendly, 1–3 yr warranties.</div></div>
+          <div class="trust-box"><div class="trust-title">Better — Brand-New Cells</div><div class="trust-sub">New NiMH modules in a rebuilt case. 3–4 yr warranties — the keeper-car choice.</div></div>
+          <div class="trust-box"><div class="trust-title">Best — New OEM or Sodium Upgrade</div><div class="trust-sub">New factory pack, or the new sodium-ion upgrade — only through suppliers whose warranty will outlive the chemistry.</div></div>
+        </div>
+        <div id="hybridLineup"></div>
+        <p style="font-size:12.5px; color:#475569; margin:12px 0 0;">Don&rsquo;t see your hybrid? (Chevy Volt, newer models, plug-ins): text us your VIN — <a href="sms:+13607728205" style="color:#0f2439; font-weight:800;">360-772-8205</a> — and we&rsquo;ll price it honestly.</p>
+      </div>
+    </section>
+
+<section class="card">
       <div class="card-head">Hybrid Parts, Chargers &amp; DIY Gear</div>
       <div class="card-body">
         <p style="font-size:12px; color:#64748b; margin:0 0 6px;">Paid links: as an Amazon Associate we earn from qualifying purchases — it costs you nothing extra and helps keep the service call at $65. Prices change; tap through for the current price. Photos are representative of the item type.</p>
@@ -768,6 +772,7 @@
       <div class="card-body" style="font-size:13px; color:#334155; line-height:1.6;">
         <p style="margin:0 0 8px;"><strong>Codes P0A80, P3011–P3024</strong> mean “replace hybrid battery” or a weak block — but a clogged cooling fan or a dying 12V battery can trigger the same warnings. Diagnose first.</p>
         <p style="margin:0 0 8px;"><strong>Core charges explained:</strong> every pack carries a refundable core deposit (about $500–$1,350) until your old pack goes back to the supplier. When we install, we handle the core return for you.</p>
+        <p style="margin:0 0 8px;"><strong>A straight word on lithium conversions:</strong> the much-advertised lithium upgrade kits for Prius were pulled from the market after durability failures — the maker itself now says the project failed, and we will not sell or install them. The upgrade we do stand behind is <strong>sodium-ion</strong>, and only through suppliers with real backing (Green Bean is owned by LKQ; the Hybrid Geek warranties theirs for 5 years). If anyone tries to sell you a lithium conversion, ask who honors the warranty when they&rsquo;re gone.</p>
         <p style="margin:0;"><strong>Fine print:</strong> battery prices, warranties and core charges are set by the seller/supplier and can change. Your pack warranty is with the manufacturer/seller named at purchase; Redemption Mobile Service LLC warrants its installation labor under its standard 12-month / 12,000-mile warranty. Always confirm fitment by VIN before ordering.</p>
       </div>
     </section>
@@ -1600,6 +1605,7 @@
       { name: 'Lectron 40A Portable EV Charger', desc: 'Vetted pick: UL-listed J1772 Level 2 — never buy an unlisted EV charger.', q: 'Lectron portable level 2 EV charger 40 amp J1772', img: 'https://vectisholidayhomes.co.uk/wp-content/uploads/2023/04/EV-Charging.jpg', store: 'amazon' }
     ];
     function renderHybrid() {
+      buildHybridTools();
       var grid = document.getElementById('hybridGrid');
       if (!grid || grid.dataset.done) return;
       grid.dataset.done = '1';
@@ -1629,6 +1635,240 @@
 
     renderCalendar();
     renderServices();
+
+
+    // ================= HYBRID FITMENT CHECKER + LINEUP =================
+    var FITMENT = [
+      { key: "prius", label: "Toyota Prius (Gen 2)", make: "Toyota", models: ["Prius"], y0: 2004, y1: 2009, twin: false, chem: "NiMH", spec: "201.6V · 28 modules", oem: "Toyota G9510-47031", from: "$1,100",
+        good: "Greentec reman from ~$1,100 (12-mo warranty) · Best Hybrid Batteries $1,549 (3-yr)",
+        better: "Greentec brand-new cells ~$2,099 (48-mo) · Green Bean Prismatic $1,749 (3-yr)",
+        best: "Green Bean Sodium-ion $1,949 (4-yr, backed by LKQ) · Hybrid Geek OEM cells $3,600 (6-yr)", note: "" },
+      { key: "prius", label: "Toyota Prius (Gen 3)", make: "Toyota", models: ["Prius"], y0: 2010, y1: 2015, twin: false, chem: "NiMH", spec: "201.6V · 28 modules", oem: "2010–11: G9510-47062 · 2012–15: G9510-76012", from: "$1,100",
+        good: "Greentec reman ~$1,100–1,399 · Best Hybrid Batteries $1,749 (3-yr)",
+        better: "Greentec new cells ~$2,099 (48-mo) · Exclusively Hybrid $1,890–1,990 (4-yr)",
+        best: "New OEM Toyota ~$2,102–2,331 + $1,350 core · Green Bean Sodium $1,949 (4-yr)",
+        note: "Two OEM revisions hide under this nameplate (2010–11 vs 2012–15) — the year picks the right one. The Prius Plug-in is a different lithium pack entirely; the VIN lookup catches it." },
+      { key: "priusc", label: "Toyota Prius c", make: "Toyota", models: ["Prius c"], y0: 2012, y1: 2017, twin: false, chem: "NiMH", spec: "144V · 20 modules", oem: "Toyota G9510-52031", from: "$1,395",
+        good: "Greentec reman $1,395 (18-mo) · Best Hybrid Batteries $1,649 (3-yr)",
+        better: "Greentec brand-new cells $1,999 (36-mo)",
+        best: "Best Hybrid Batteries 6-yr tier $2,149",
+        note: "Smaller 144V pack — never interchangeable with regular Prius packs." },
+      { key: "priusv", label: "Toyota Prius v", make: "Toyota", models: ["Prius v"], y0: 2012, y1: 2017, twin: false, chem: "NiMH", spec: "201.6V · 28 modules", oem: "Toyota G9510-76010 family", from: "$1,100",
+        good: "Greentec reman (Prius-family pricing from ~$1,100)",
+        better: "Greentec brand-new cells ~$2,099",
+        best: "New OEM Toyota by VIN — priced by dealer quote", note: "Same battery family as the Gen 3 Prius, in a wagon-sized case." },
+      { key: "camry", label: "Toyota Camry Hybrid (XV40)", make: "Toyota", models: ["Camry"], y0: 2007, y1: 2011, twin: true, chem: "NiMH", spec: "34 modules", oem: "Toyota G9510-33010", from: "$1,599",
+        good: "Greentec reman $1,599 · Best Hybrid Batteries $1,849",
+        better: "Greentec new cells $2,199 · Green Bean Prismatic $2,049",
+        best: "Hybrid Geek OEM cells (top tier)", note: "" },
+      { key: "camry", label: "Toyota Camry Hybrid (XV50)", make: "Toyota", models: ["Camry"], y0: 2012, y1: 2017, twin: true, chem: "NiMH", spec: "244.8V · 34 modules", oem: "Toyota G9510-33050", from: "$1,949",
+        good: "Best Hybrid Batteries $1,949 (3-yr) · Greentec reman",
+        better: "Greentec brand-new cells",
+        best: "Hybrid Geek Sodium $2,995 (5-yr) · OEM cells $4,000 (6-yr)",
+        note: "Every 2012–17 Camry Hybrid trim uses NiMH — no trim guessing needed. (The lithium split starts with the 2018 redesign.)" },
+      { key: "highlander", label: "Toyota Highlander Hybrid", make: "Toyota", models: ["Highlander"], y0: 2006, y1: 2013, twin: true, chem: "NiMH", spec: "~288V", oem: "2006–10: G9510-48010 family · 2011–13: G9510-48060", from: "$1,999",
+        good: "Greentec reman $1,999 · Best Hybrid Batteries $2,549–2,849 (by year)",
+        better: "Greentec brand-new cells $2,999",
+        best: "New OEM 2011–13 ~$3,932 (dealer street price)",
+        note: "This nameplate hides FOUR different packs (2006–07 / 2008 / 2009–10 / 2011–13). The year split matters — De confirms by VIN + the old pack's label before ordering." },
+      { key: "ct200h", label: "Lexus CT 200h", make: "Lexus", models: ["CT 200h"], y0: 2011, y1: 2017, twin: false, chem: "NiMH", spec: "201.6V · 28 modules", oem: "Lexus G9510-76010 / -76012 family", from: "$1,749",
+        good: "Best Hybrid Batteries $1,749",
+        better: "Greentec brand-new cells $2,099 (48-mo)",
+        best: "New OEM Lexus by VIN", note: "" },
+      { key: "es300h", label: "Lexus ES 300h", make: "Lexus", models: ["ES 300h"], y0: 2013, y1: 2018, twin: false, chem: "NiMH", spec: "244.8V · 34 modules", oem: "Lexus G9510-62010 (confirmed by VIN)", from: "$2,049",
+        good: "Best Hybrid Batteries $2,049",
+        better: "Greentec new-gen cells $2,395",
+        best: "New OEM Lexus by VIN (dealer quote)", note: "" },
+      { key: "rx400h", label: "Lexus RX 400h", make: "Lexus", models: ["RX 400h"], y0: 2006, y1: 2008, twin: false, chem: "NiMH", spec: "288V", oem: "Lexus G9510-48010 / -48011", from: "$1,999",
+        good: "Greentec reman $1,999 · Best Hybrid Batteries $2,549–2,649",
+        better: "Greentec new-gen cells $2,999",
+        best: "", note: "New packs are no longer made for the RX 400h — Better is the top tier." },
+      { key: "rx450h", label: "Lexus RX 450h", make: "Lexus", models: ["RX 450h"], y0: 2010, y1: 2015, twin: false, chem: "NiMH", spec: "288V · 30 modules", oem: "Confirmed by VIN (dealer quote)", from: "$1,799",
+        good: "Reconditioned from ~$1,799 · Best Hybrid Batteries $2,949",
+        better: "Greentec new-gen cells $3,599",
+        best: "New OEM Lexus by VIN (dealer quote)", note: "" },
+      { key: "civic", label: "Honda Civic Hybrid (1st gen)", make: "Honda", models: ["Civic"], y0: 2003, y1: 2005, twin: true, chem: "NiMH IMA", spec: "144V", oem: "Honda reman 1D070-PZA-335RM", from: "$999",
+        good: "Greentec reman $999.99 (12-mo)",
+        better: "Greentec new 8.0 Ah cells $1,199.99",
+        best: "Honda dealer reman (quote) · Best Hybrid Batteries $1,749 (3-yr, 6-yr option)",
+        note: "Honda sells remanufactured packs only — there is no brand-new Honda pack, whatever anyone tells you." },
+      { key: "civic", label: "Honda Civic Hybrid (2nd gen)", make: "Honda", models: ["Civic"], y0: 2006, y1: 2011, twin: true, chem: "NiMH IMA", spec: "~158V · 22 modules", oem: "Honda reman 1D070-RMX-A80RM (06–08) / A90RM (09–11)", from: "$999",
+        good: "Greentec reman $999.99",
+        better: "Greentec new 8.0 Ah cells $1,499.99 (36-mo)",
+        best: "Best Hybrid Batteries $1,949 (3-yr) / $2,549 (6-yr)",
+        note: "Honda sells remanufactured packs only. On install we match the pack's battery-code label to your car's software, the way Honda's service bulletin requires." },
+      { key: "insight", label: "Honda Insight (1st gen)", make: "Honda", models: ["Insight"], y0: 2000, y1: 2006, twin: false, chem: "NiMH IMA", spec: "144V", oem: "Confirmed by VIN", from: "$1,695",
+        good: "Best Hybrid Batteries $1,749",
+        better: "Green Bean New Module Cylindrical $1,695",
+        best: "Honda dealer reman (quote)", note: "" },
+      { key: "insight", label: "Honda Insight (2nd gen)", make: "Honda", models: ["Insight"], y0: 2010, y1: 2014, twin: false, chem: "NiMH IMA", spec: "Mild-hybrid IMA pack", oem: "Confirmed by VIN", from: "$1,590",
+        good: "Best Hybrid Batteries $1,749",
+        better: "Green Bean Cylindrical $1,695 · NewPriusBatteries DIY module kit $1,590 (reuses your case)",
+        best: "Honda dealer reman (quote)", note: "" },
+      { key: "accord", label: "Honda Accord Hybrid (V6)", make: "Honda", models: ["Accord"], y0: 2005, y1: 2007, twin: true, chem: "NiMH IMA", spec: "~144V · 3.0L V6 hybrid", oem: "Confirmed by VIN", from: "$999",
+        good: "Greentec reman $999",
+        better: "Greentec new 8.0 Ah cells $1,495",
+        best: "Best Hybrid Batteries $1,749", note: "The V6 hybrid Accord — a different animal from the later 4-cylinder Accord Hybrids." },
+      { key: "escape", label: "Ford Escape Hybrid (+ Mercury Mariner / Mazda Tribute)", make: "Ford", models: ["Escape", "Mariner", "Tribute"], y0: 2005, y1: 2012, twin: true, chem: "NiMH", spec: "~330V", oem: "Confirmed by VIN before ordering", from: "$1,749",
+        good: "Green Bean reconditioned $1,749",
+        better: "Greentec new-gen cells (quoted with install)",
+        best: "",
+        note: "Two different packs hide here: 2005–09 ≠ 2010–12 — De confirms by VIN. The same pack fits the Mercury Mariner Hybrid and Mazda Tribute Hybrid." },
+      { key: "fusion", label: "Ford Fusion Hybrid (+ Milan / MKZ Hybrid)", make: "Ford", models: ["Fusion", "Milan", "MKZ"], y0: 2010, y1: 2012, twin: true, chem: "NiMH", spec: "~275V · 28 modules", oem: "Dorman 587-019 family — confirmed by VIN", from: "$1,550",
+        good: "Greentec reman $1,550 · Best Hybrid Batteries $1,949",
+        better: "Greentec new-gen cells $1,950",
+        best: "",
+        note: "Same pack fits the Mercury Milan Hybrid (2010–11) and Lincoln MKZ Hybrid (2011–12). Warning: the 2013+ Fusion Hybrid switched to lithium — those packs are NOT interchangeable." },
+      { key: "altima", label: "Nissan Altima Hybrid", make: "Nissan", models: ["Altima"], y0: 2007, y1: 2011, twin: true, chem: "NiMH", spec: "244.8V · 34 modules", oem: "Nissan 295C1-JA80A", from: "$1,949",
+        good: "Best Hybrid Batteries reman $1,949 (3-yr)",
+        better: "Hybrid Geek NexGen cells $2,149 (3-yr)",
+        best: "Best Hybrid Batteries 6-yr $2,549 · Hybrid Geek OEM cells $4,000 (6-yr)",
+        note: "Built on Toyota's hybrid system under license — and the simplest fitment on this page: one pack for all five years." },
+      { key: "sonata", label: "Hyundai Sonata / Kia Optima Hybrid (early)", make: "Hyundai", models: ["Sonata", "Optima"], y0: 2011, y1: 2012, twin: true, chem: "Lithium-ion polymer (factory)", spec: "270V", oem: "Confirmed by VIN", from: "$2,249",
+        good: "Best Hybrid Batteries $2,249",
+        better: "Greentec new-gen $3,649",
+        best: "",
+        note: "These came with a lithium-polymer pack from the factory — and long factory hybrid coverage on many cars. We check your factory warranty first: if Hyundai/Kia owes you a free battery, we'll tell you." },
+      { key: "sonata", label: "Hyundai Sonata / Kia Optima Hybrid (later)", make: "Hyundai", models: ["Sonata", "Optima"], y0: 2013, y1: 2015, twin: true, chem: "Lithium-ion polymer (factory)", spec: "270V", oem: "Confirmed by VIN", from: "$2,449",
+        good: "Best Hybrid Batteries $2,449",
+        better: "Greentec new-gen $3,649",
+        best: "",
+        note: "Different pack from the 2011–12 cars — never interchangeable. We check your factory hybrid warranty first; if the factory owes you a battery, we'll tell you." }
+    ];
+    var FIT_MAKES = ["Toyota", "Lexus", "Honda", "Ford", "Mercury", "Mazda", "Lincoln", "Nissan", "Hyundai", "Kia"];
+    var FIT_MAKE_MODELS = {
+      "Toyota": [["prius", "Prius"], ["priusc", "Prius c"], ["priusv", "Prius v"], ["camry", "Camry"], ["highlander", "Highlander"]],
+      "Lexus": [["ct200h", "CT 200h"], ["es300h", "ES 300h"], ["rx400h", "RX 400h"], ["rx450h", "RX 450h"]],
+      "Honda": [["civic", "Civic"], ["insight", "Insight"], ["accord", "Accord"]],
+      "Ford": [["escape", "Escape"], ["fusion", "Fusion"]],
+      "Mercury": [["escape", "Mariner"], ["fusion", "Milan"]],
+      "Mazda": [["escape", "Tribute"]],
+      "Lincoln": [["fusion", "MKZ"]],
+      "Nissan": [["altima", "Altima"]],
+      "Hyundai": [["sonata", "Sonata"]],
+      "Kia": [["sonata", "Optima"]]
+    };
+    function fitRowFor(key, year) {
+      for (var i = 0; i < FITMENT.length; i++) {
+        if (FITMENT[i].key === key && year >= FITMENT[i].y0 && year <= FITMENT[i].y1) return FITMENT[i];
+      }
+      return null;
+    }
+    function fitTierBox(title, body, color) {
+      if (!body) return "";
+      return '<div class="trust-box"><div class="trust-title" style="color:' + color + ';">' + title + '</div><div class="trust-sub">' + body + '</div></div>';
+    }
+    function fitRenderRow(row, extraLine) {
+      var h = '<div class="pay-card" style="text-align:left;">' +
+        '<div style="font-size:15px; font-weight:900; color:#0f2439;">✅ Your battery: ' + row.label + ' (' + row.y0 + '–' + row.y1 + ')</div>' +
+        '<div style="font-size:12.5px; color:#64748b; margin:4px 0 10px;">' + row.chem + ' · ' + row.spec + ' · Factory part: ' + row.oem + '</div>' +
+        (extraLine ? '<div style="font-size:12.5px; color:#92400e; background:#fef3c7; border-radius:8px; padding:8px 10px; margin:0 0 10px;">' + extraLine + '</div>' : '') +
+        '<div class="grid-3">' +
+        fitTierBox("Good — Reconditioned", row.good, "#065f46") +
+        fitTierBox("Better — New Cells", row.better, "#0f2439") +
+        fitTierBox("Best — OEM / Upgrade", row.best, "#7c2d12") +
+        '</div>' +
+        (row.note ? '<p style="font-size:12.5px; color:#475569; margin:10px 0 0;">' + row.note + '</p>' : '') +
+        '<p style="font-size:12.5px; color:#475569; margin:8px 0 10px;">Pack prices checked November 2026 and confirmed at quote time. Final step before ordering: De verifies the fit against your full VIN and the old pack\'s label — that\'s on us, not you.</p>' +
+        '<button type="button" class="btn-navy" onclick="hybridQuote(\'' + row.label.replace(/'/g, "") + ' (' + row.y0 + '-' + row.y1 + ')\')">Get My Installed Quote</button>' +
+        '</div>';
+      document.getElementById('fitResult').innerHTML = h;
+    }
+    function fitFallback(msg) {
+      document.getElementById('fitResult').innerHTML = '<div class="pay-card" style="text-align:left;"><div style="font-size:14px; font-weight:800; color:#0f2439;">' + msg + '</div>' +
+        '<p style="font-size:12.5px; color:#475569; margin:6px 0 10px;">Text us your VIN and we\'ll match the exact battery and price it honestly — no guessing with a part this expensive.</p>' +
+        '<a href="sms:+13607728205?&body=' + encodeURIComponent("Hi Redemption Mobile Service, please check hybrid battery fitment for my vehicle. My VIN is: ") + '" class="btn-navy" style="text-decoration:none;">Text Us Your VIN</a></div>';
+    }
+    function fitYearChanged() {
+      var mk = document.getElementById('fitMake');
+      mk.innerHTML = '<option value="">Make</option>';
+      FIT_MAKES.forEach(function(m) { mk.innerHTML += '<option value="' + m + '">' + m + '</option>'; });
+      document.getElementById('fitModel').innerHTML = '<option value="">Model</option>';
+      document.getElementById('fitHybridWrap').style.display = 'none';
+    }
+    function fitMakeChanged() {
+      var make = document.getElementById('fitMake').value;
+      var md = document.getElementById('fitModel');
+      md.innerHTML = '<option value="">Model</option>';
+      (FIT_MAKE_MODELS[make] || []).forEach(function(pair) { md.innerHTML += '<option value="' + pair[0] + '">' + pair[1] + '</option>'; });
+      document.getElementById('fitHybridWrap').style.display = 'none';
+    }
+    function fitModelChanged() {
+      var key = document.getElementById('fitModel').value;
+      var year = parseInt(document.getElementById('fitYear').value, 10);
+      var row = key && year ? fitRowFor(key, year) : null;
+      var wrap = document.getElementById('fitHybridWrap');
+      wrap.style.display = (row && row.twin) ? 'block' : 'none';
+    }
+    function fitShowResult() {
+      var year = parseInt(document.getElementById('fitYear').value, 10);
+      var key = document.getElementById('fitModel').value;
+      if (!year || !key) { showToast('Pick a year and a model first'); return; }
+      if (key === 'fusion' && year >= 2013) { fitFallback('Your 2013+ Fusion Hybrid uses a lithium-ion pack that is NOT interchangeable with the 2010–12 NiMH packs.'); return; }
+      if (key === 'prius' && year >= 2016) { fitFallback('Gen 4 Prius (2016+) uses two different battery chemistries depending on trim — a VIN alone can\'t separate them safely.'); return; }
+      if (key === 'camry' && year >= 2018) { fitFallback('2018+ Camry Hybrid splits by trim — LE is lithium, SE/XLE are NiMH — so we match it by the pack label, not a guess.'); return; }
+      var row = fitRowFor(key, year);
+      if (!row) { fitFallback('We don\'t list a pack for that year/model combination yet.'); return; }
+      if (row.twin && !document.getElementById('fitHybrid').checked) {
+        document.getElementById('fitResult').innerHTML = '<div class="pay-card" style="text-align:left;"><div style="font-size:14px; font-weight:800; color:#0f2439;">One quick check: is yours the Hybrid?</div><p style="font-size:12.5px; color:#475569; margin:6px 0 0;">The ' + row.label + ' nameplate also comes as a regular gas car, which has no hybrid battery. Tick the "Mine is the Hybrid version" box above and tap Find My Battery again.</p></div>';
+        return;
+      }
+      fitRenderRow(row, '');
+    }
+    function fitByVin() {
+      var vin = document.getElementById('fitVin').value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+      if (vin.length !== 17) { showToast('A VIN has 17 characters — check and try again'); return; }
+      var res = document.getElementById('fitResult');
+      res.innerHTML = '<div class="pay-card" style="text-align:left; font-size:13.5px; color:#334155;">Decoding your VIN in the NHTSA federal database…</div>';
+      fetch('https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/' + encodeURIComponent(vin) + '?format=json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var v = (data && data.Results && data.Results[0]) || {};
+          if (!v.ModelYear || v.ErrorCode === '1') { fitFallback('That VIN didn\'t decode cleanly — double-check the characters (no I, O or Q in a VIN).'); return; }
+          var year = parseInt(v.ModelYear, 10);
+          var modelRaw = (v.Model || '').toUpperCase().replace(/[\s\-]/g, '');
+          var elec = (v.ElectrificationLevel || '');
+          var keyMap = { PRIUS: 'prius', PRIUSC: 'priusc', PRIUSV: 'priusv', CAMRY: 'camry', HIGHLANDER: 'highlander', CT200H: 'ct200h', ES300H: 'es300h', RX400H: 'rx400h', RX450H: 'rx450h', CIVIC: 'civic', INSIGHT: 'insight', ACCORD: 'accord', ESCAPE: 'escape', MARINER: 'escape', TRIBUTE: 'escape', FUSION: 'fusion', MILAN: 'fusion', MKZ: 'fusion', ALTIMA: 'altima', SONATA: 'sonata', OPTIMA: 'sonata' };
+          var key = keyMap[modelRaw];
+          if (modelRaw.indexOf('PRIME') > -1 || (key === 'prius' && elec.indexOf('PHEV') > -1)) { fitFallback('Your VIN decodes to a plug-in Prius — a factory lithium pack, completely different from the hybrid Prius packs.'); return; }
+          if (!key) { fitFallback('Your VIN decodes to a ' + year + ' ' + (v.Make || '') + ' ' + (v.Model || '') + ' — not a model in our battery matrix yet.'); return; }
+          if (key === 'fusion' && year >= 2013) { fitFallback('Your VIN decodes to a ' + year + ' Fusion — the 2013+ Fusion Hybrid uses a lithium-ion pack that is NOT interchangeable with the 2010–12 NiMH packs.'); return; }
+          if (key === 'prius' && year >= 2016) { fitFallback('Your VIN decodes to a Gen 4 Prius — two chemistries by trim, and the VIN alone can\'t separate them safely.'); return; }
+          if (key === 'camry' && year >= 2018) { fitFallback('Your VIN decodes to a 2018+ Camry — the hybrid battery splits by trim (LE lithium, SE/XLE NiMH), so we match it by the pack label.'); return; }
+          var row = fitRowFor(key, year);
+          if (!row) { fitFallback('Your VIN decodes to a ' + year + ' ' + (v.Make || '') + ' ' + (v.Model || '') + ' — outside the years in our battery matrix.'); return; }
+          var proof = ((v.Trim || '').toUpperCase().indexOf('HYBRID') > -1) || elec !== '' || (v.FuelTypeSecondary || '') === 'Electric' || ((v.EngineModel || '').toUpperCase().indexOf('FXE') > -1);
+          var extra = '';
+          if (row.twin && !proof) extra = 'Heads-up: the federal record for this VIN doesn\'t flag it as a hybrid (that field is often blank on real hybrids). If yours is the gas model, there is no hybrid battery — if it\'s the hybrid, the match below is your pack and De confirms it before ordering.';
+          fitRenderRow(row, 'Decoded: ' + year + ' ' + (v.Make || '') + ' ' + (v.Model || '') + (v.Trim ? ' · ' + v.Trim : '') + (v.EngineModel ? ' · Engine ' + v.EngineModel : '') + '. ' + extra);
+        })
+        .catch(function() { fitFallback('The VIN decoder didn\'t answer just now — try the year/make/model picker above, or text us the VIN.'); });
+    }
+    function buildHybridTools() {
+      var lineup = document.getElementById('hybridLineup');
+      if (lineup && !lineup.dataset.done) {
+        lineup.dataset.done = '1';
+        var h = '';
+        for (var i = 0; i < FITMENT.length; i++) {
+          var r = FITMENT[i];
+          h += '<details style="border:1px solid #e2e8f0; border-radius:10px; padding:10px 14px; margin:0 0 10px; background:#fff;">' +
+            '<summary style="cursor:pointer; font-weight:800; color:#0f2439; font-size:14.5px;">' + r.label + ' <span style="color:#64748b; font-weight:600;">(' + r.y0 + '–' + r.y1 + ') · packs from ' + r.from + '</span></summary>' +
+            '<div style="font-size:12.5px; color:#64748b; margin:8px 0;">' + r.chem + ' · ' + r.spec + ' · Factory part: ' + r.oem + '</div>' +
+            '<div class="grid-3">' + fitTierBox('Good — Reconditioned', r.good, '#065f46') + fitTierBox('Better — New Cells', r.better, '#0f2439') + fitTierBox('Best — OEM / Upgrade', r.best, '#7c2d12') + '</div>' +
+            (r.note ? '<p style="font-size:12.5px; color:#475569; margin:8px 0 0;">' + r.note + '</p>' : '') +
+            '<div style="margin-top:10px;"><button type="button" class="btn-navy" onclick="hybridQuote(\'' + r.label.replace(/'/g, '') + ' (' + r.y0 + '-' + r.y1 + ')\')">Get My Installed Quote</button></div>' +
+            '</details>';
+        }
+        lineup.innerHTML = h;
+      }
+      var yr = document.getElementById('fitYear');
+      if (yr && !yr.dataset.done) {
+        yr.dataset.done = '1';
+        var opts = '<option value="">Year</option>';
+        for (var y = 2026; y >= 2000; y--) opts += '<option value="' + y + '">' + y + '</option>';
+        yr.innerHTML = opts;
+      }
+    }
 
     // ================= ELECTRONIC INSPECTION SUITE =================
     var FORMS = {
