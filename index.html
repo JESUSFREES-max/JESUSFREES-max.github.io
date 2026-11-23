@@ -856,6 +856,11 @@
       <div class="card-head">Free Repair Manuals &amp; Car Resources — Genuinely Free</div>
       <div class="card-body">
         <p style="font-size:14px; color:#334155; line-height:1.6; margin:0 0 6px;">Every link on this page is <strong>actually free</strong> — no trials, no signup scams. We put it together for DIYers around Clackamas, Beaverton, Gresham &amp; Vancouver. And when a job turns out bigger than the driveway, <strong>we come to you</strong>.</p>
+        <p style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:10px 0 0;">
+          <button type="button" id="btnCopyResources" style="background:#b48327; color:#fff; border:none; padding:9px 16px; border-radius:8px; font-weight:800; cursor:pointer; font-size:14px;">🔗 Copy Link to This Page</button>
+          <span id="copyResMsg" style="font-size:13px; color:#166534; font-weight:700;"></span>
+        </p>
+        <p style="font-size:12.5px; color:#64748b; margin:6px 0 0;">Send this page to a friend: <span style="font-weight:700; color:#0f2439;">jesusfrees-max.github.io/?view=resources</span></p>
       </div>
     </section>
     <section class="card">
@@ -993,6 +998,7 @@
       else if (which === 'resources') { navResources.classList.add('active'); viewResources.classList.remove('hidden'); window.scrollTo(0,0); }
       else if (which === 'gallery') { document.getElementById('viewGallery').classList.remove('hidden'); window.scrollTo(0,0); }
       else { navShop.classList.add('active'); viewShop.classList.remove('hidden'); renderShop(); }
+      try { history.replaceState(null, '', which === 'quote' ? location.pathname : '?view=' + which); } catch (e) {}
     }
     navQuote.addEventListener('click', function() { switchView('quote'); });
     navInspect.addEventListener('click', function() { switchView('inspect'); });
@@ -2179,6 +2185,32 @@
         if (app === 'contractor') { setTimeout(function () { var el = document.getElementById('contractorCard'); if (el) { el.scrollIntoView(); } }, 350); }
       } else if (view) { switchView(view); }
     })();
+    var btnCR = document.getElementById('btnCopyResources');
+    if (btnCR) { btnCR.addEventListener('click', function () {
+      var url = 'https://jesusfrees-max.github.io/?view=resources';
+      function done() { var m = document.getElementById('copyResMsg'); if (m) { m.textContent = 'Copied — paste it anywhere to share this page.'; } }
+      function fallback() { var t = document.createElement('textarea'); t.value = url; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(t); }
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(done, fallback); } else { fallback(); }
+    }); }
+    // Every page gets its own shareable link: add a Copy Link button to the top of each view
+    ['Quote', 'Inspect', 'Pay', 'Portal', 'Shop', 'Buy', 'Hybrid', 'Gallery'].forEach(function (name) {
+      var view = document.getElementById('view' + name); if (!view) return;
+      var key = name.toLowerCase();
+      var url = 'https://jesusfrees-max.github.io/' + (key === 'quote' ? '' : '?view=' + key);
+      var bar = document.createElement('div');
+      bar.style.cssText = 'display:flex; justify-content:flex-end; margin:0 0 10px;';
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = '🔗 Copy Link to This Page';
+      b.style.cssText = 'background:#0f2439; color:#fff; border:none; padding:8px 14px; border-radius:8px; font-weight:800; cursor:pointer; font-size:13px;';
+      b.addEventListener('click', function () {
+        function done() { b.textContent = '✓ Copied — paste to share'; setTimeout(function () { b.textContent = '🔗 Copy Link to This Page'; }, 2500); }
+        function fallback() { var t = document.createElement('textarea'); t.value = url; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(t); }
+        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(done, fallback); } else { fallback(); }
+      });
+      bar.appendChild(b);
+      view.insertBefore(bar, view.firstChild);
+    });
     var deferredInstallPrompt = null;
     window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredInstallPrompt = e; });
     function browserKind() {
