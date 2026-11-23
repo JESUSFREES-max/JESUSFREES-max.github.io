@@ -35,22 +35,40 @@
     <p class="sub">For mechanics working with Redemption Mobile Service LLC. Install this app to keep the contractor portal one tap away — registration, standards, and job coordination.</p>
     <button id="btnInstall" class="btn btn-gold" type="button">📲 Install the Contractor App</button>
     <a class="btn btn-navy" href="/?app=contractor">🔧 Open the Contractor Portal</a>
-    <div id="installHelp" class="help" hidden>
-      <b>Android (Chrome):</b> tap the ⋮ menu, then <b>Install app</b> / <b>Add to Home screen</b>.<br>
-      <b>iPhone (Safari):</b> tap the <b>Share</b> button, then <b>Add to Home Screen</b>.
-    </div>
+    <div id="installHelp" class="help" hidden></div>
     <p class="fine">Redemption Mobile Service LLC · Clackamas, OR · 360-772-8205<br>Honest work, done right — Colossians 3:23</p>
   </div>
   <script>
     if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(function(){}); }
     var deferredPrompt = null;
     window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
+    function browserKind() {
+      var ua = navigator.userAgent || '';
+      if (/DuckDuckGo\//.test(ua)) return 'ddg';
+      if (/SamsungBrowser\//.test(ua)) return 'samsung';
+      if (/FxiOS\/|CriOS\//.test(ua)) return 'iosbrowser';
+      if (/Firefox\//.test(ua)) return 'firefox';
+      if (/iPhone|iPad|iPod/.test(ua)) return 'iossafari';
+      if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) return 'iossafari';
+      return 'chrome';
+    }
+    function showHelp() {
+      var el = document.getElementById('installHelp');
+      var k = browserKind(), h = '';
+      if (k === 'samsung') h = '<b>Samsung Internet:</b> tap the <b>☰ menu</b> (bottom right) → <b>Add page to</b> → <b>Home screen</b>. An install icon in the address bar works too.';
+      else if (k === 'firefox') h = '<b>Firefox:</b> tap the <b>⋮ menu</b> → <b>Add to Home screen</b> (or <b>Install</b>).';
+      else if (k === 'ddg') h = '<b>DuckDuckGo can\'t install apps.</b> Open this page in <b>Chrome</b>, then tap Install there.<br><a href="intent://jesusfrees-max.github.io/contractor.html#Intent;scheme=https;package=com.android.chrome;end" style="display:inline-block; margin-top:8px; font-weight:900; background:#fff; color:#0f2439; padding:8px 14px; border-radius:8px; text-decoration:none;">OPEN IN CHROME</a>';
+      else if (k === 'iosbrowser') h = '<b>On iPhone, apps install from Safari only.</b> Open this page in <b>Safari</b>, tap <b>Share</b> → <b>Add to Home Screen</b>.';
+      else if (k === 'iossafari') h = '<b>iPhone (Safari):</b> tap the <b>Share</b> button, then <b>Add to Home Screen</b>.';
+      else h = '<b>Android (Chrome):</b> tap the <b>⋮ menu</b>, then <b>Install app</b> / <b>Add to Home screen</b>.<br><b>iPhone (Safari):</b> tap the <b>Share</b> button, then <b>Add to Home Screen</b>.';
+      el.innerHTML = h; el.hidden = false;
+    }
     document.getElementById('btnInstall').addEventListener('click', function () {
       if (deferredPrompt) {
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then(function () { deferredPrompt = null; });
       } else {
-        document.getElementById('installHelp').hidden = false;
+        showHelp();
       }
     });
   </script>

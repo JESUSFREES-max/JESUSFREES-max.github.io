@@ -299,7 +299,7 @@
       </div>
       <button type="button" onclick="installCustomerApp()" style="font-weight:900; font-size:15px; background:linear-gradient(90deg,#b48327,#d4a017); color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer;">INSTALL</button>
       <a href="contractor.html" style="font-weight:900; font-size:15px; background:#fff; color:#0f2439; padding:10px 16px; border-radius:8px; text-decoration:none;">CONTRACTOR APP</a>
-      <div id="installHelp" class="hidden" style="flex-basis:100%; font-size:13px; line-height:1.6;">Android (Chrome): tap the ⋮ menu → <b>Install app</b> / <b>Add to Home screen</b>.<br>iPhone (Safari): tap <b>Share</b> → <b>Add to Home Screen</b>.</div>
+      <div id="installHelp" class="hidden" style="flex-basis:100%; font-size:13px; line-height:1.6;"></div>
     </div>
     <section class="card">
       <div class="card-head">1. Enter Your Vehicle (VIN Auto-Decode or Year / Make / Model)</div>
@@ -2181,9 +2181,32 @@
     })();
     var deferredInstallPrompt = null;
     window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredInstallPrompt = e; });
+    function browserKind() {
+      var ua = navigator.userAgent || '';
+      if (/DuckDuckGo\//.test(ua)) return 'ddg';
+      if (/SamsungBrowser\//.test(ua)) return 'samsung';
+      if (/FxiOS\/|CriOS\//.test(ua)) return 'iosbrowser';
+      if (/Firefox\//.test(ua)) return 'firefox';
+      if (/Edg(A|iOS)?\//.test(ua)) return 'chrome';
+      if (/Chrome\//.test(ua)) return 'chrome';
+      if (/iPhone|iPad|iPod/.test(ua)) return 'iossafari';
+      if (/Safari\//.test(ua)) return 'iossafari';
+      return 'chrome';
+    }
+    function showInstallHelp() {
+      var el = document.getElementById('installHelp'); if (!el) return;
+      var k = browserKind(), h = '';
+      if (k === 'samsung') h = '<b>Samsung Internet:</b> tap the <b>☰ menu</b> (bottom right) → <b>Add page to</b> → <b>Home screen</b>. If a download/install icon appears in the address bar, tapping it works too.';
+      else if (k === 'firefox') h = '<b>Firefox:</b> tap the <b>⋮ menu</b> → <b>Add to Home screen</b> (on newer versions: <b>Install</b>).';
+      else if (k === 'ddg') h = '<b>DuckDuckGo can\'t install apps</b> — no browser setting changes that. Open this page in <b>Chrome</b>, then tap INSTALL there.<br><a href="intent://jesusfrees-max.github.io/#Intent;scheme=https;package=com.android.chrome;end" style="display:inline-block; margin-top:8px; font-weight:900; background:#fff; color:#0f2439; padding:8px 14px; border-radius:8px; text-decoration:none;">OPEN IN CHROME</a>';
+      else if (k === 'iosbrowser') h = '<b>On iPhone, apps can only be installed from Safari.</b> Open this page in <b>Safari</b>, then tap <b>Share</b> → <b>Add to Home Screen</b>.';
+      else if (k === 'iossafari') h = '<b>iPhone (Safari):</b> tap the <b>Share</b> button → <b>Add to Home Screen</b>.';
+      else h = '<b>Android (Chrome):</b> tap the <b>⋮ menu</b> → <b>Install app</b> / <b>Add to Home screen</b>.<br><b>iPhone (Safari):</b> tap <b>Share</b> → <b>Add to Home Screen</b>.';
+      el.innerHTML = h; el.classList.remove('hidden');
+    }
     function installCustomerApp() {
       if (deferredInstallPrompt) { deferredInstallPrompt.prompt(); deferredInstallPrompt.userChoice.then(function () { deferredInstallPrompt = null; }); }
-      else { var el = document.getElementById('installHelp'); if (el) { el.classList.toggle('hidden'); } }
+      else { showInstallHelp(); }
     }
   </script>
 </body>
