@@ -422,7 +422,7 @@
             </div>
           </div>
           <div class="grid-3" style="margin-bottom: 12px;">
-            <div><label class="lbl">Your Name</label><input id="bookName" type="text" required placeholder="Full Name"></div>
+            <div><label class="lbl">Your Name (optional)</label><input id="bookName" type="text" placeholder="Full Name"></div>
             <div><label class="lbl">Phone Number</label><input id="bookPhone" type="tel" required placeholder="(360) 555-0199"></div>
             <div><label class="lbl">Service Address / City</label><input id="bookAddress" type="text" required placeholder="Street Address, City"></div>
           </div>
@@ -1371,7 +1371,7 @@
       for (var i = 0; i < SERVICES.length; i++) if (selectedIds[SERVICES[i].id]) chosen.push(SERVICES[i].name);
       var summary = [
         'REDEMPTION MOBILE SERVICE LLC — BOOKING REQUEST',
-        'Customer: ' + document.getElementById('bookName').value.trim() + ' (' + document.getElementById('bookPhone').value.trim() + ')',
+        'Customer: ' + (document.getElementById('bookName').value.trim() || '(name not given)') + ' (' + document.getElementById('bookPhone').value.trim() + ')',
         'Address: ' + document.getElementById('bookAddress').value.trim(),
         'Date / Window: ' + document.getElementById('bookDate').value + ' • ' + selectedSlot,
         'Vehicle: ' + getVehicleLabel() + ' | VIN: ' + (document.getElementById('vinInput').value.trim() || 'N/A'),
