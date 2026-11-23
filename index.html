@@ -2192,23 +2192,50 @@
       function fallback() { var t = document.createElement('textarea'); t.value = url; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(t); }
       if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(done, fallback); } else { fallback(); }
     }); }
-    // Every page gets its own shareable link: add a Copy Link button to the top of each view
+    // Every page gets a share bar: printed link + Share sheet + Copy button
+    function rmsCopyLink(url, btn) {
+      function done() { var old = btn.getAttribute('data-label') || btn.textContent; btn.textContent = '\u2713 Copied \u2014 paste to share'; setTimeout(function () { btn.textContent = old; }, 2500); }
+      function fallback() {
+        var t = document.createElement('textarea');
+        t.value = url; t.setAttribute('readonly', '');
+        t.style.cssText = 'position:fixed; top:0; left:0; width:2em; height:2em; opacity:0;';
+        document.body.appendChild(t);
+        t.select(); try { t.setSelectionRange(0, url.length); } catch (e) {}
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(t);
+        if (ok) { done(); } else { var old = btn.getAttribute('data-label') || btn.textContent; btn.textContent = 'Long-press the link above to copy'; setTimeout(function () { btn.textContent = old; }, 3000); }
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(done, fallback); } else { fallback(); }
+    }
     ['Quote', 'Inspect', 'Pay', 'Portal', 'Shop', 'Buy', 'Hybrid', 'Gallery'].forEach(function (name) {
       var view = document.getElementById('view' + name); if (!view) return;
       var key = name.toLowerCase();
       var url = 'https://jesusfrees-max.github.io/' + (key === 'quote' ? '' : '?view=' + key);
+      var title = 'Redemption Mobile Service \u2014 ' + (key === 'quote' ? 'Get a Quote' : name);
       var bar = document.createElement('div');
-      bar.style.cssText = 'display:flex; justify-content:flex-end; margin:0 0 10px;';
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.textContent = '🔗 Copy Link to This Page';
-      b.style.cssText = 'background:#0f2439; color:#fff; border:none; padding:8px 14px; border-radius:8px; font-weight:800; cursor:pointer; font-size:13px;';
-      b.addEventListener('click', function () {
-        function done() { b.textContent = '✓ Copied — paste to share'; setTimeout(function () { b.textContent = '🔗 Copy Link to This Page'; }, 2500); }
-        function fallback() { var t = document.createElement('textarea'); t.value = url; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(t); }
-        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(done, fallback); } else { fallback(); }
+      bar.style.cssText = 'background:#eef2f7; border:1px solid #cbd5e1; border-radius:10px; padding:10px 12px; margin:0 0 12px;';
+      var lab = document.createElement('div');
+      lab.style.cssText = 'font-size:12px; font-weight:800; color:#0f2439; letter-spacing:.4px; text-transform:uppercase; margin:0 0 4px;';
+      lab.textContent = '\uD83D\uDD17 Share this page';
+      var link = document.createElement('div');
+      link.style.cssText = 'font-size:13.5px; font-weight:700; color:#1d4ed8; word-break:break-all; margin:0 0 8px; -webkit-user-select:text; user-select:text;';
+      link.textContent = url.replace('https://', '');
+      var row = document.createElement('div');
+      row.style.cssText = 'display:flex; gap:8px; flex-wrap:wrap;';
+      var sb = document.createElement('button');
+      sb.type = 'button'; sb.textContent = '\uD83D\uDCE4 Share\u2026'; sb.setAttribute('data-label', '\uD83D\uDCE4 Share\u2026');
+      sb.style.cssText = 'background:#b48327; color:#fff; border:none; padding:9px 16px; border-radius:8px; font-weight:800; cursor:pointer; font-size:13.5px;';
+      sb.addEventListener('click', function () {
+        if (navigator.share) { navigator.share({ title: title, url: url }).catch(function () {}); }
+        else { rmsCopyLink(url, sb); }
       });
-      bar.appendChild(b);
+      var cb = document.createElement('button');
+      cb.type = 'button'; cb.textContent = '\uD83D\uDD17 Copy Link'; cb.setAttribute('data-label', '\uD83D\uDD17 Copy Link');
+      cb.style.cssText = 'background:#0f2439; color:#fff; border:none; padding:9px 16px; border-radius:8px; font-weight:800; cursor:pointer; font-size:13.5px;';
+      cb.addEventListener('click', function () { rmsCopyLink(url, cb); });
+      row.appendChild(sb); row.appendChild(cb);
+      bar.appendChild(lab); bar.appendChild(link); bar.appendChild(row);
       view.insertBefore(bar, view.firstChild);
     });
     var deferredInstallPrompt = null;
