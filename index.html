@@ -1037,14 +1037,6 @@
     // ================= QUOTE & BOOKING LOGIC =================
     var LABOR_RATE = 150;
     var SERVICES = [
-      { id: 'ppi_bundle', cat: 'Diagnostics & Inspections', name: 'Pre-Purchase Inspection + History Check', hrs: 1.0, parts: 0, query: 'OBD2 scanner' },
-      { id: 'diag', cat: 'Diagnostics & Inspections', name: 'Full Diagnostic — Check Engine / No-Start / Electrical (up to 1 hr of testing)', hrs: 1.0, parts: 0, query: 'OBD2 scanner' },
-      { id: 'brake_insp', cat: 'Diagnostics & Inspections', name: 'Brake Inspection (All 4 Wheels)', hrs: 0.5, parts: 0, query: 'brake inspection tools' },
-      { id: 'hybrid_check', cat: 'Diagnostics & Inspections', name: 'Hybrid Battery Health Check', hrs: 0.5, parts: 0, query: 'hybrid battery diagnostic' },
-      { id: 'brakes_f', cat: 'Brakes', name: 'Front Brake Pads & Rotors', hrs: 1.25, parts: 145, query: 'front brake pads and rotors kit' },
-      { id: 'brakes_r', cat: 'Brakes', name: 'Rear Brake Pads & Rotors', hrs: 1.25, parts: 135, query: 'rear brake pads and rotors kit' },
-      { id: 'caliper', cat: 'Brakes', name: 'Brake Caliper Replacement (Per Side)', hrs: 1.0, parts: 120, query: 'brake caliper' },
-      { id: 'brake_flush', cat: 'Brakes', name: 'Brake Fluid Flush', hrs: 0.75, parts: 25, query: 'dot 4 brake fluid' },
       { id: 'battery', cat: 'Engine & Electrical', name: '12V Battery Replacement', hrs: 0.5, parts: 165, query: 'car battery' },
       { id: 'alt', cat: 'Engine & Electrical', name: 'Alternator Replacement', hrs: 1.5, parts: 195, query: 'alternator' },
       { id: 'starter', cat: 'Engine & Electrical', name: 'Starter Motor Replacement', hrs: 1.25, parts: 155, query: 'starter motor' },
@@ -1054,17 +1046,25 @@
       { id: 'waterpump', cat: 'Engine & Electrical', name: 'Water Pump Replacement', hrs: 2.5, parts: 160, query: 'water pump' },
       { id: 'thermostat', cat: 'Engine & Electrical', name: 'Thermostat Replacement', hrs: 1.0, parts: 45, query: 'thermostat housing' },
       { id: 'rad_hose', cat: 'Engine & Electrical', name: 'Radiator Hose Set Replacement', hrs: 0.75, parts: 60, query: 'radiator hose kit' },
+      { id: 'brakes_f', cat: 'Brakes', name: 'Front Brake Pads & Rotors', hrs: 1.25, parts: 145, query: 'front brake pads and rotors kit' },
+      { id: 'brakes_r', cat: 'Brakes', name: 'Rear Brake Pads & Rotors', hrs: 1.25, parts: 135, query: 'rear brake pads and rotors kit' },
+      { id: 'caliper', cat: 'Brakes', name: 'Brake Caliper Replacement (Per Side)', hrs: 1.0, parts: 120, query: 'brake caliper' },
+      { id: 'brake_flush', cat: 'Brakes', name: 'Brake Fluid Flush', hrs: 0.75, parts: 25, query: 'dot 4 brake fluid' },
       { id: 'oil', cat: 'Maintenance', name: 'Full Synthetic Oil & Filter Change', hrs: 0.5, parts: 45, query: 'oil filter and synthetic motor oil' },
       { id: 'filters', cat: 'Maintenance', name: 'Engine + Cabin Air Filters', hrs: 0.25, parts: 40, query: 'engine and cabin air filter' },
       { id: 'coolant_flush', cat: 'Maintenance', name: 'Coolant Flush & Fill', hrs: 0.75, parts: 55, query: 'antifreeze coolant' },
       { id: 'trans_fluid', cat: 'Maintenance', name: 'Transmission Fluid Service', hrs: 1.0, parts: 85, query: 'transmission fluid and filter kit' },
       { id: 'bulbs', cat: 'Maintenance', name: 'Headlight / Bulb Replacement', hrs: 0.25, parts: 25, query: 'headlight bulb' },
-      { id: 'bearing', cat: 'Suspension & Steering', name: 'Wheel Bearing Replacement', hrs: 1.5, parts: 140, query: 'wheel hub bearing assembly' },
-      { id: 'cv_axle', cat: 'Suspension & Steering', name: 'CV Axle Replacement', hrs: 1.25, parts: 150, query: 'cv axle shaft' },
-      { id: 'tie_rod', cat: 'Suspension & Steering', name: 'Tie Rod End Replacement', hrs: 0.75, parts: 70, query: 'tie rod end' },
       { id: 'jump', cat: 'Roadside Help', name: 'Jump Start Service', hrs: 0.25, parts: 0, query: 'jump starter' },
       { id: 'lockout', cat: 'Roadside Help', name: 'Vehicle Lockout Service', hrs: 0.6667, parts: 0, query: 'lockout kit' },
       { id: 'fuel', cat: 'Roadside Help', name: 'Emergency Fuel Delivery', hrs: 0.25, parts: 15, query: 'gas can' }
+      { id: 'bearing', cat: 'Suspension & Steering', name: 'Wheel Bearing Replacement', hrs: 1.5, parts: 140, query: 'wheel hub bearing assembly' },
+      { id: 'cv_axle', cat: 'Suspension & Steering', name: 'CV Axle Replacement', hrs: 1.25, parts: 150, query: 'cv axle shaft' },
+      { id: 'tie_rod', cat: 'Suspension & Steering', name: 'Tie Rod End Replacement', hrs: 0.75, parts: 70, query: 'tie rod end' },
+      { id: 'ppi_bundle', cat: 'Diagnostics & Inspections', name: 'Pre-Purchase Inspection + History Check', hrs: 1.0, parts: 0, query: 'OBD2 scanner' },
+      { id: 'diag', cat: 'Diagnostics & Inspections', name: 'Full Diagnostic — Check Engine / No-Start / Electrical (up to 1 hr of testing)', hrs: 1.0, parts: 0, query: 'OBD2 scanner' },
+      { id: 'brake_insp', cat: 'Diagnostics & Inspections', name: 'Brake Inspection (All 4 Wheels)', hrs: 0.5, parts: 0, query: 'brake inspection tools' },
+      { id: 'hybrid_check', cat: 'Diagnostics & Inspections', name: 'Hybrid Battery Health Check', hrs: 0.5, parts: 0, query: 'hybrid battery diagnostic' },
     ];
     var SERVICE_CALL_FEE = 65;
     var selectedIds = { brakes_f: true };
