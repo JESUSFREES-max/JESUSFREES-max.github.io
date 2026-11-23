@@ -1511,6 +1511,9 @@
       { cat: 'Maintenance', name: 'Castrol EDGE 10W-30 (5 QT)', desc: "🧰 From De's own toolbox — the oil De prefers to install: Fluid Titanium formula (10W-30 comes in standard EDGE — no Extended Performance jug in this grade). Best price found Nov 23: $31.97 at Walmart.", q: 'Castrol EDGE 10W-30 full synthetic 5 quart', img: 'https://m.media-amazon.com/images/I/61gDXTNkq-L.jpg', fav: false },
       { cat: 'Maintenance', name: 'Castrol GTX Diesel 15W-40 (1 GAL)', desc: "Castrol's diesel workhorse: CK-4 15W-40 for Power Stroke, Cummins & Duramax diesels — carries Ford's WSS-M2C171-F1 spec. Best price found Nov 23: $21.97 at Walmart.", q: 'Castrol GTX Diesel 15W-40 1 gallon', img: 'https://m.media-amazon.com/images/I/71YWV5EMMuL.jpg', fav: false },
       { cat: 'Maintenance', name: 'Castrol VECTON 15W-40 Diesel (1 GAL)', desc: "Castrol's premium diesel oil: part-synthetic CK-4 15W-40 built for extended drains in hard-working diesels. Best price found Nov 23: $33.99 at Advance Auto.", q: 'Castrol VECTON 15W-40 CK-4 1 gallon', img: 'https://m.media-amazon.com/images/I/71RhcsEdQlL.jpg', fav: false },
+      { cat: 'Maintenance', name: 'AMSOIL Signature Series 0W-20', desc: "Premium tier: AMSOIL Signature Series 100% synthetic — the lineup that won the 16-oil independent test, rated up to 25,000 miles in normal service. De installs it — text to book your AMSOIL oil change.", q: 'AMSOIL Signature Series 0W-20', img: 'assets/amsoil-0w20.jpg', fav: false, direct: 'sms', tag: 'PREMIUM TIER' },
+      { cat: 'Maintenance', name: 'AMSOIL Signature Series 5W-20', desc: "Premium tier: AMSOIL Signature Series 100% synthetic — the lineup that won the 16-oil independent test, rated up to 25,000 miles in normal service. De installs it — text to book your AMSOIL oil change.", q: 'AMSOIL Signature Series 5W-20', img: 'assets/amsoil-5w20.jpg', fav: false, direct: 'sms', tag: 'PREMIUM TIER' },
+      { cat: 'Maintenance', name: 'AMSOIL Signature Series 5W-30', desc: "Premium tier: AMSOIL Signature Series 100% synthetic — the exact grade that won the 16-oil independent test, rated up to 25,000 miles in normal service. De installs it — text to book your AMSOIL oil change.", q: 'AMSOIL Signature Series 5W-30', img: 'assets/amsoil-5w30.jpg', fav: false, direct: 'sms', tag: 'PREMIUM TIER — TEST WINNER' },
       { cat: 'Apparel', name: 'Red Kap Mechanic Work Shirts', desc: 'Vetted pick: what dealership techs wear — soil-release ripstop.', q: 'Red Kap automotive work shirt mechanic', img: 'https://s.turbifycdn.com/aah/yhst-54326505879580/sy20ng-navy-grey-short-sleeve-crew-shirt-117.jpg', fav: false }
     ];
     var activeShopCat = 'All';
@@ -1548,15 +1551,17 @@
         var amz = 'https://www.amazon.com/s?k=' + q + '&tag=' + encodeURIComponent(amazonTag);
         var hf = 'https://www.harborfreight.com/search?q=' + q;
         var eb = ebayLink(q);
+        var imgTag = it.img ? '<img src="' + it.img + '" alt="' + it.name + '" loading="lazy" onerror="this.style.display=\'none\'" style="width:100%; height:150px; object-fit:cover; border-radius:8px; margin-bottom:10px;">' : '';
         html += '<div class="pay-card">' +
-          (it.img ? '<a href="' + amz + '" target="_blank" rel="noopener"><img src="' + it.img + '" alt="' + it.name + '" loading="lazy" onerror="this.style.display=\'none\'" style="width:100%; height:150px; object-fit:cover; border-radius:8px; margin-bottom:10px;"></a>' : '') +
-          '<div><span class="pay-badge" style="background:#0f2439;">' + it.cat.toUpperCase() + '</span>' + (it.fav ? '<span class="pay-badge" style="background:#b45309; margin-left:6px;">&#9733; MECHANIC\'S FAVORITE</span>' : '') +
+          (it.img ? (it.direct ? imgTag : '<a href="' + amz + '" target="_blank" rel="noopener">' + imgTag + '</a>') : '') +
+          '<div><span class="pay-badge" style="background:#0f2439;">' + it.cat.toUpperCase() + '</span>' + (it.fav ? '<span class="pay-badge" style="background:#b45309; margin-left:6px;">&#9733; MECHANIC\'S FAVORITE</span>' : '') + (it.tag ? '<span class="pay-badge" style="background:#7c3aed; margin-left:6px;">' + it.tag + '</span>' : '') +
           '<div style="font-size:14px; font-weight:800; color:#0f2439; margin-top:6px;">' + it.name + '</div>' +
           '<div style="font-size:12px; color:#64748b; margin-top:3px;">' + it.desc + '</div></div>' +
           '<div class="btn-row">' +
+          (it.direct === 'sms' ? '<a href="sms:+13607728205?&body=' + encodeURIComponent('Hi Redemption Mobile Service, I would like to book an oil change with ' + it.name + '. My vehicle is: ____') + '" class="src-btn" style="background:#0f766e;">&#128242; Text De to Book This Oil</a>' :
           '<a href="' + amz + '" target="_blank" rel="noopener" class="src-btn src-amz">Amazon</a>' +
           '<span class="src-btn" style="background:#94a3b8; cursor:default;" title="Shown for price info only">Harbor Freight</span>' +
-          '<a href="' + eb + '" target="_blank" rel="noopener" class="src-btn" style="background:#0f766e;">eBay</a>' +
+          '<a href="' + eb + '" target="_blank" rel="noopener" class="src-btn" style="background:#0f766e;">eBay</a>') +
           '</div></div>';
       }
       grid.innerHTML = html;
