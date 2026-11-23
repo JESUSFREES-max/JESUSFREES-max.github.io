@@ -879,6 +879,8 @@
     var partNums = {};
     var selectedSlot = 'Morning (8AM–11AM)';
     var amazonTag = 'redemptionm06-20';
+    var epnCampId = '5339257663';
+    function ebayLink(q) { return 'https://rover.ebay.com/rover/1/711-53200-19255-0/1?campid=' + epnCampId + '&mpre=' + encodeURIComponent('https://www.ebay.com/sch/i.html?_nkw=' + q); }
 
     function getVehicleLabel() {
       var arr = [];
@@ -1391,7 +1393,7 @@
         { name: 'RockAuto', badge: '#1d4ed8', tc: '#ffffff', note: 'Often lowest wholesale price on OEM & aftermarket parts', url: 'https://www.rockauto.com/en/partsearch/?partnum=' + q },
         { name: 'Harbor Freight', badge: '#b91c1c', tc: '#ffffff', note: 'Best budget value on jacks, impact wrenches & hand tools', url: 'https://www.harborfreight.com/search?q=' + q },
         { name: 'AutoZone', badge: '#ea580c', tc: '#ffffff', note: 'Same-day local pickup & lifetime warranty on select parts', url: 'https://www.autozone.com/searchresult?searchText=' + q },
-        { name: 'eBay Motors', badge: '#0f766e', tc: '#ffffff', note: 'OEM take-offs, kits & hard-to-find parts', url: 'https://www.ebay.com/sch/i.html?_nkw=' + q }
+        { name: 'eBay Motors', badge: '#0f766e', tc: '#ffffff', note: 'OEM take-offs, kits & hard-to-find parts', url: ebayLink(q) }
       ];
       var rows = stores.map(function(st) {
         return '<div class="part-row" style="margin-bottom:0; border:none; border-bottom:1px solid #e2e8f0; border-radius:0;">' +
@@ -1415,7 +1417,7 @@
         var q = encodeURIComponent(it.q);
         var amz = 'https://www.amazon.com/s?k=' + q + '&tag=' + encodeURIComponent(amazonTag);
         var hf = 'https://www.harborfreight.com/search?q=' + q;
-        var eb = 'https://www.ebay.com/sch/i.html?_nkw=' + q;
+        var eb = ebayLink(q);
         html += '<div class="pay-card">' +
           (it.img ? '<a href="' + amz + '" target="_blank" rel="noopener"><img src="' + it.img + '" alt="' + it.name + '" loading="lazy" onerror="this.style.display=\'none\'" style="width:100%; height:150px; object-fit:cover; border-radius:8px; margin-bottom:10px;"></a>' : '') +
           '<div><span class="pay-badge" style="background:#0f2439;">' + it.cat.toUpperCase() + '</span>' + (it.fav ? '<span class="pay-badge" style="background:#b45309; margin-left:6px;">&#9733; MECHANIC\'S FAVORITE</span>' : '') +
@@ -1471,7 +1473,7 @@
         var it = HYBRID_ITEMS[i];
         var q = encodeURIComponent(it.q);
         var amz = 'https://www.amazon.com/s?k=' + q + '&tag=' + encodeURIComponent(amazonTag);
-        var eb = 'https://www.ebay.com/sch/i.html?_nkw=' + q;
+        var eb = ebayLink(q);
         var main = it.store === 'ebay' ? eb : amz;
         html += '<div class="pay-card">' +
           (it.img ? '<a href="' + main + '" target="_blank" rel="noopener sponsored"><img src="' + it.img + '" alt="' + it.name + '" loading="lazy" onerror="this.style.display=\'none\'" style="width:100%; height:150px; object-fit:cover; border-radius:8px; margin-bottom:10px;"></a>' : '') +
