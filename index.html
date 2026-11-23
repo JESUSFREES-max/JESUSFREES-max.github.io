@@ -14,6 +14,14 @@
   <meta property="og:description" content="Mobile mechanic in Clackamas, Beaverton, Gresham & Vancouver. Brakes, diagnostics, batteries, roadside help — backed by a 12-month/12,000-mile warranty. Call/Text 360-772-8205.">
   <meta property="og:url" content="https://jesusfrees-max.github.io/">
   <meta property="og:image" content="https://jesusfrees-max.github.io/assets/logo.jpg">
+  <link rel="manifest" href="manifest-customer.json">
+  <meta name="theme-color" content="#0a0a14">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Redemption">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" href="assets/icon-192.png">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -282,6 +290,16 @@
         <div style="font-size:13px; opacity:.95;">Factory manuals, Chilton, recall checks, VIN decoder — every link genuinely free. Tap to open the Free Resources page.</div>
       </div>
       <div style="font-weight:900; font-size:15px; background:#0f2439; padding:9px 16px; border-radius:8px;">OPEN &rarr;</div>
+    </div>
+    <div style="background:#0f2439; color:#fff; border-radius:10px; padding:14px 18px; margin:0 0 14px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; box-shadow:0 2px 8px rgba(15,36,57,.45);">
+      <img src="assets/icon-192.png" alt="Redemption app icon" style="width:44px; height:44px; border-radius:10px;">
+      <div style="flex:1; min-width:220px;">
+        <div style="font-weight:900; font-size:17px;">📲 Get the Redemption App — Free</div>
+        <div style="font-size:13px; opacity:.95;">Customers: quotes, booking &amp; Rewards one tap away. Contractors: install the Contractor App from its own page.</div>
+      </div>
+      <button type="button" onclick="installCustomerApp()" style="font-weight:900; font-size:15px; background:linear-gradient(90deg,#b48327,#d4a017); color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer;">INSTALL</button>
+      <a href="contractor.html" style="font-weight:900; font-size:15px; background:#fff; color:#0f2439; padding:10px 16px; border-radius:8px; text-decoration:none;">CONTRACTOR APP</a>
+      <div id="installHelp" class="hidden" style="flex-basis:100%; font-size:13px; line-height:1.6;">Android (Chrome): tap the ⋮ menu → <b>Install app</b> / <b>Add to Home screen</b>.<br>iPhone (Safari): tap <b>Share</b> → <b>Add to Home Screen</b>.</div>
     </div>
     <section class="card">
       <div class="card-head">1. Enter Your Vehicle (VIN Auto-Decode or Year / Make / Model)</div>
@@ -586,7 +604,7 @@
         </div>
       </section>
 
-      <section class="card">
+      <section class="card" id="contractorCard">
         <div class="card-head">Contractor / Mechanic Registration</div>
         <div class="card-body">
           <form id="techRegForm">
@@ -2150,6 +2168,23 @@
       document.getElementById('clearBanner').classList.add('hidden');
       renderForm(); showToast('Form cleared');
     });
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(function () {}); }
+    (function () {
+      var p = new URLSearchParams(location.search);
+      var app = p.get('app'), view = p.get('view');
+      if (app === 'contractor' || view === 'portal') {
+        switchView('portal');
+        if (app === 'contractor') { setTimeout(function () { var el = document.getElementById('contractorCard'); if (el) { el.scrollIntoView(); } }, 350); }
+      } else if (view) { switchView(view); }
+    })();
+    var deferredInstallPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredInstallPrompt = e; });
+    function installCustomerApp() {
+      if (deferredInstallPrompt) { deferredInstallPrompt.prompt(); deferredInstallPrompt.userChoice.then(function () { deferredInstallPrompt = null; }); }
+      else { var el = document.getElementById('installHelp'); if (el) { el.classList.toggle('hidden'); } }
+    }
   </script>
 </body>
 </html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redemption Contractor App — Redemption Mobile Service LLC</title>
+  <meta name="description" content="Contractor app for Redemption Mobile Service LLC mechanics: open the contractor portal, register, and coordinate jobs.">
+  <link rel="manifest" href="manifest-contractor.json">
+  <meta name="theme-color" content="#0a0a14">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="RMS Contractor">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" href="assets/icon-192.png">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background:#02020a; color:#f8fafc; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px 16px; }
+    .wrap { max-width:440px; width:100%; text-align:center; }
+    img.logo { width:150px; height:150px; border-radius:28px; box-shadow:0 8px 30px rgba(212,160,23,.35); }
+    h1 { font-size:24px; margin:18px 0 6px; color:#e9aa66; }
+    p.sub { color:#cbd5e1; font-size:15px; line-height:1.55; margin:0 0 22px; }
+    .btn { display:block; width:100%; padding:15px 18px; border-radius:10px; font-size:16px; font-weight:900; border:none; cursor:pointer; margin:0 0 12px; text-decoration:none; }
+    .btn-gold { background:linear-gradient(90deg,#b48327,#d4a017); color:#fff; }
+    .btn-navy { background:#0f2439; color:#fff; border:1px solid #d4a017; }
+    .help { text-align:left; background:#0f172a; border:1px solid #1e293b; border-radius:10px; padding:14px 16px; font-size:13.5px; line-height:1.6; color:#cbd5e1; margin-top:16px; }
+    .help b { color:#fbbf24; }
+    .fine { font-size:12px; color:#94a3b8; margin-top:18px; line-height:1.5; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <img class="logo" src="assets/icon-512.png" alt="Redemption Mobile Service LLC crest">
+    <h1>Redemption Contractor App</h1>
+    <p class="sub">For mechanics working with Redemption Mobile Service LLC. Install this app to keep the contractor portal one tap away — registration, standards, and job coordination.</p>
+    <button id="btnInstall" class="btn btn-gold" type="button">📲 Install the Contractor App</button>
+    <a class="btn btn-navy" href="/?app=contractor">🔧 Open the Contractor Portal</a>
+    <div id="installHelp" class="help" hidden>
+      <b>Android (Chrome):</b> tap the ⋮ menu, then <b>Install app</b> / <b>Add to Home screen</b>.<br>
+      <b>iPhone (Safari):</b> tap the <b>Share</b> button, then <b>Add to Home Screen</b>.
+    </div>
+    <p class="fine">Redemption Mobile Service LLC · Clackamas, OR · 360-772-8205<br>Honest work, done right — Colossians 3:23</p>
+  </div>
+  <script>
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(function(){}); }
+    var deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
+    document.getElementById('btnInstall').addEventListener('click', function () {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function () { deferredPrompt = null; });
+      } else {
+        document.getElementById('installHelp').hidden = false;
+      }
+    });
+  </script>
+</body>
+</html>
