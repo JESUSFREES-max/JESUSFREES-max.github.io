@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop Hours Calculator — Redemption Mobile Service</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #02020a; color: #f2ead8; font-family: -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; padding: 16px 14px 40px; max-width: 560px; margin: 0 auto; }
+  header { text-align: center; padding: 10px 0 14px; }
+  header img { width: 72px; height: 72px; border-radius: 16px; }
+  h1 { color: #e0a962; font-size: 24px; margin-top: 8px; letter-spacing: .5px; }
+  .sub { color: #b8ab8c; font-size: 13px; margin-top: 3px; }
+  .card { background: #0d0d1d; border: 1px solid #2a2a44; border-radius: 14px; padding: 16px; margin-top: 14px; }
+  label { display: block; font-size: 13px; color: #b8ab8c; margin: 12px 0 5px; text-transform: uppercase; letter-spacing: .6px; }
+  label:first-child { margin-top: 0; }
+  input[type=text], input[type=number], select { width: 100%; background: #171730; border: 1px solid #3a3a5c; border-radius: 10px; color: #fff; font-size: 17px; padding: 12px; }
+  .row { display: flex; gap: 10px; }
+  .row > div { flex: 1; }
+  .cls { display: flex; gap: 8px; }
+  .cls button { flex: 1; background: #171730; border: 1px solid #3a3a5c; color: #cfc4a5; border-radius: 10px; padding: 12px 4px; font-size: 14px; cursor: pointer; }
+  .cls button.active { background: #e0a962; color: #14100a; font-weight: 700; border-color: #e0a962; }
+  .cls button small { display: block; font-size: 11px; opacity: .75; margin-top: 2px; }
+  .tog { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-top: 1px solid #23233c; }
+  .tog:first-of-type { border-top: none; }
+  .tog span { font-size: 15px; }
+  .tog small { display: block; color: #b8ab8c; font-size: 12px; margin-top: 2px; max-width: 300px; }
+  .switch { position: relative; width: 52px; height: 30px; flex: none; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .sl { position: absolute; inset: 0; background: #3a3a5c; border-radius: 30px; transition: .2s; cursor: pointer; }
+  .sl:before { content: ''; position: absolute; width: 24px; height: 24px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; }
+  .switch input:checked + .sl { background: #e0a962; }
+  .switch input:checked + .sl:before { transform: translateX(22px); }
+  .out { background: #0d0d1d; border: 1px solid #e0a962; border-radius: 14px; padding: 16px; margin-top: 14px; }
+  .line { display: flex; justify-content: space-between; font-size: 15px; padding: 5px 0; color: #e8e0cb; }
+  .line.cred { color: #8fd18f; }
+  .total { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #2a2a44; margin-top: 10px; padding-top: 12px; }
+  .total b { font-size: 17px; }
+  .total .amt { color: #e0a962; font-size: 32px; font-weight: 800; }
+  .quote { background: #171730; border: 1px dashed #3a3a5c; border-radius: 10px; padding: 12px; font-size: 14px; line-height: 1.5; margin-top: 14px; user-select: all; }
+  .copybtn { width: 100%; margin-top: 10px; background: #1d3a6e; color: #fff; border: none; border-radius: 10px; padding: 14px; font-size: 16px; font-weight: 700; cursor: pointer; }
+  .note { color: #8d83a0; font-size: 12px; text-align: center; margin-top: 16px; line-height: 1.6; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <img src="assets/icon-192.png" alt="Redemption Mobile Service">
+  <h1>SHOP HOURS CALCULATOR</h1>
+  <div class="sub">Redemption Mobile Service — De's pricing, baked in</div>
+</header>
+
+<div class="card">
+  <label for="preset">Standard job — tap to fill hours &amp; parts</label>
+  <select id="preset"><option value="">Custom job (enter hours below)</option></select>
+
+  <label for="jobName">Job name</label>
+  <input type="text" id="jobName" placeholder="e.g. Front Brake Pads &amp; Rotors">
+
+  <label for="vehName">Vehicle (for the quote line)</label>
+  <input type="text" id="vehName" placeholder="e.g. 2016 Toyota Prius">
+
+  <label>Vehicle class</label>
+  <div class="cls" id="clsRow">
+    <button data-mult="1" class="active">Car<small>× 1.0</small></button>
+    <button data-mult="1.15">SUV / Minivan<small>× 1.15</small></button>
+    <button data-mult="1.3">Truck / Van / Diesel<small>× 1.3</small></button>
+  </div>
+
+  <div id="bookRow">
+    <div class="row">
+      <div>
+        <label for="hrs">Book hours</label>
+        <input type="number" id="hrs" inputmode="decimal" step="0.05" min="0" placeholder="0.00">
+      </div>
+      <div>
+        <label for="parts">Parts $</label>
+        <input type="number" id="parts" inputmode="decimal" step="1" min="0" placeholder="0">
+      </div>
+    </div>
+  </div>
+
+  <div id="flatRow" class="hidden">
+    <label for="flat">Flat job price $</label>
+    <input type="number" id="flat" inputmode="decimal" step="1" min="0" placeholder="0">
+  </div>
+
+  <div style="margin-top:14px">
+    <div class="tog">
+      <span>Flat-price job (roadside)<small>Jump starts, lockouts, fuel — one flat price instead of hours</small></span>
+      <label class="switch"><input type="checkbox" id="flatMode"><span class="sl"></span></label>
+    </div>
+    <div class="tog">
+      <span>$65 service call<small>Trip charge — never credited or waived</small></span>
+      <label class="switch"><input type="checkbox" id="svcCall" checked><span class="sl"></span></label>
+    </div>
+    <div class="tog" id="diagTog">
+      <span>$150 diagnostic<small>Credited when repair labor alone is $300+</small></span>
+      <label class="switch"><input type="checkbox" id="diag"><span class="sl"></span></label>
+    </div>
+  </div>
+</div>
+
+<div class="out">
+  <div id="lines"></div>
+  <div class="total"><b>TOTAL</b><span class="amt" id="totalAmt">$0.00</span></div>
+  <div class="quote" id="quoteLine"></div>
+  <button class="copybtn" id="copyBtn">📋 Copy Quote</button>
+</div>
+
+<div class="note">Book hours come from your labor guide (Chilton).<br>Labor $150/book hr · Diagnostic credit rule applied automatically.<br>Redemption Mobile Service · 360-772-8205</div>
+
+<script>
+var LABOR_RATE = 150, SERVICE_CALL = 65, DIAGNOSTIC = 150, CREDIT_AT = 300;
+var PRESETS = [
+  { cat: 'Engine & Electrical', name: '12V Battery Replacement', hrs: 0.5, parts: 165 },
+  { cat: 'Engine & Electrical', name: 'Alternator Replacement', hrs: 1.5, parts: 195 },
+  { cat: 'Engine & Electrical', name: 'Starter Motor Replacement', hrs: 1.25, parts: 155 },
+  { cat: 'Engine & Electrical', name: 'Spark Plugs & Ignition Coils', hrs: 1.0, parts: 130 },
+  { cat: 'Engine & Electrical', name: 'Ignition Coil Replacement (Single)', hrs: 0.5, parts: 65 },
+  { cat: 'Engine & Electrical', name: 'Serpentine Belt & Tensioner', hrs: 0.75, parts: 75 },
+  { cat: 'Engine & Electrical', name: 'Water Pump Replacement', hrs: 2.5, parts: 160 },
+  { cat: 'Engine & Electrical', name: 'Thermostat Replacement', hrs: 1.0, parts: 45 },
+  { cat: 'Engine & Electrical', name: 'Radiator Hose Set Replacement', hrs: 0.75, parts: 60 },
+  { cat: 'Brakes', name: 'Front Brake Pads & Rotors', hrs: 1.25, parts: 145 },
+  { cat: 'Brakes', name: 'Rear Brake Pads & Rotors', hrs: 1.25, parts: 135 },
+  { cat: 'Brakes', name: 'Brake Caliper Replacement (Per Side)', hrs: 1.0, parts: 120 },
+  { cat: 'Brakes', name: 'Brake Fluid Flush', hrs: 0.75, parts: 25 },
+  { cat: 'Brakes', name: 'Brake Inspection (All 4 Wheels)', hrs: 0.5, parts: 0 },
+  { cat: 'Maintenance', name: 'Full Synthetic Oil & Filter Change', hrs: 0.5, parts: 45 },
+  { cat: 'Maintenance', name: 'Engine + Cabin Air Filters', hrs: 0.25, parts: 40 },
+  { cat: 'Maintenance', name: 'Coolant Flush & Fill', hrs: 0.75, parts: 55 },
+  { cat: 'Maintenance', name: 'Transmission Fluid Service', hrs: 1.0, parts: 85 },
+  { cat: 'Maintenance', name: 'Headlight / Bulb Replacement', hrs: 0.25, parts: 25 },
+  { cat: 'Roadside Help', name: 'Jump Start Service', hrs: 0.25, parts: 0 },
+  { cat: 'Roadside Help', name: 'Vehicle Lockout Service', hrs: 0.6667, parts: 0 },
+  { cat: 'Roadside Help', name: 'Emergency Fuel Delivery', hrs: 0.25, parts: 15 },
+  { cat: 'Suspension & Steering', name: 'Wheel Bearing Replacement', hrs: 1.5, parts: 140 },
+  { cat: 'Suspension & Steering', name: 'CV Axle Replacement', hrs: 1.25, parts: 150 },
+  { cat: 'Suspension & Steering', name: 'Tie Rod End Replacement', hrs: 0.75, parts: 70 },
+  { cat: 'Diagnostics & Inspections', name: 'Pre-Purchase Inspection + History Check', hrs: 1.0, parts: 0 },
+  { cat: 'Diagnostics & Inspections', name: 'Hybrid Battery Health Check', hrs: 0.5, parts: 0 }
+];
+var mult = 1.0;
+
+function computeQuote(s) {
+  var labor = 0, parts = 0, flat = 0, svc = s.svcCall ? SERVICE_CALL : 0, diagCharge = 0, credited = false;
+  if (s.flatMode) { flat = s.flat || 0; }
+  else { labor = (s.hrs || 0) * LABOR_RATE * s.mult; parts = s.parts || 0; }
+  if (s.diag && !s.flatMode) {
+    if (labor >= CREDIT_AT) { credited = true; diagCharge = 0; } else { diagCharge = DIAGNOSTIC; }
+  }
+  var total = labor + parts + flat + svc + diagCharge;
+  return { labor: labor, parts: parts, flat: flat, svc: svc, diagCharge: diagCharge, credited: credited, total: total };
+}
+
+function money(n) { return '$' + n.toFixed(2); }
+
+function render() {
+  var s = {
+    flatMode: document.getElementById('flatMode').checked,
+    hrs: parseFloat(document.getElementById('hrs').value) || 0,
+    parts: parseFloat(document.getElementById('parts').value) || 0,
+    flat: parseFloat(document.getElementById('flat').value) || 0,
+    svcCall: document.getElementById('svcCall').checked,
+    diag: document.getElementById('diag').checked,
+    mult: mult
+  };
+  document.getElementById('bookRow').classList.toggle('hidden', s.flatMode);
+  document.getElementById('flatRow').classList.toggle('hidden', !s.flatMode);
+  document.getElementById('diagTog').style.opacity = s.flatMode ? '0.4' : '1';
+  var q = computeQuote(s);
+  var html = '', bits = [];
+  var job = document.getElementById('jobName').value.trim() || 'Job';
+  var veh = document.getElementById('vehName').value.trim();
+  if (s.flatMode) {
+    html += '<div class="line"><span>Flat job price</span><span>' + money(q.flat) + '</span></div>';
+    bits.push(job + ' ' + money(q.flat));
+  } else {
+    html += '<div class="line"><span>Labor — ' + s.hrs.toFixed(2) + ' hrs × $150' + (s.mult !== 1 ? ' × ' + s.mult : '') + '</span><span>' + money(q.labor) + '</span></div>';
+    bits.push('labor ' + money(q.labor));
+    if (q.parts > 0) { html += '<div class="line"><span>Parts</span><span>' + money(q.parts) + '</span></div>'; bits.push('parts ' + money(q.parts)); }
+  }
+  if (s.diag && !s.flatMode) {
+    if (q.credited) { html += '<div class="line cred"><span>Diagnostic — CREDITED (labor $300+)</span><span>$0.00</span></div>'; bits.push('diagnostic credited'); }
+    else { html += '<div class="line"><span>Diagnostic</span><span>' + money(q.diagCharge) + '</span></div>'; bits.push('diagnostic ' + money(q.diagCharge)); }
+  }
+  if (q.svc > 0) { html += '<div class="line"><span>Service call</span><span>' + money(q.svc) + '</span></div>'; bits.push('service call ' + money(q.svc)); }
+  document.getElementById('lines').innerHTML = html;
+  document.getElementById('totalAmt').textContent = money(q.total);
+  var head = (veh ? veh + ' — ' : '') + job + ': ';
+  document.getElementById('quoteLine').textContent = 'Quote — ' + head + bits.join(' + ') + ' = ' + money(q.total) + ' total. Redemption Mobile Service, 360-772-8205';
+}
+
+var sel = document.getElementById('preset');
+var lastCat = '';
+PRESETS.forEach(function(p, i) {
+  if (p.cat !== lastCat) { var g = document.createElement('optgroup'); g.label = p.cat; sel.appendChild(g); lastCat = p.cat; }
+  var o = document.createElement('option'); o.value = i; o.textContent = p.name; sel.lastChild.appendChild(o);
+});
+sel.addEventListener('change', function() {
+  if (this.value === '') return;
+  var p = PRESETS[+this.value];
+  document.getElementById('jobName').value = p.name;
+  document.getElementById('hrs').value = p.hrs;
+  document.getElementById('parts').value = p.parts;
+  document.getElementById('flatMode').checked = false;
+  render();
+});
+document.querySelectorAll('#clsRow button').forEach(function(b) {
+  b.addEventListener('click', function() {
+    document.querySelectorAll('#clsRow button').forEach(function(x) { x.classList.remove('active'); });
+    this.classList.add('active'); mult = parseFloat(this.getAttribute('data-mult')); render();
+  });
+});
+['hrs','parts','flat','jobName','vehName'].forEach(function(id) { document.getElementById(id).addEventListener('input', render); });
+['flatMode','svcCall','diag'].forEach(function(id) { document.getElementById(id).addEventListener('change', render); });
+document.getElementById('copyBtn').addEventListener('click', function() {
+  var btn = this, txt = document.getElementById('quoteLine').textContent;
+  function done() { btn.textContent = '✅ Copied!'; setTimeout(function() { btn.textContent = '📋 Copy Quote'; }, 2000); }
+  if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt).then(done, function() { fallback(); }); } else { fallback(); }
+  function fallback() {
+    var ta = document.createElement('textarea'); ta.value = txt;
+    ta.style.position = 'fixed'; ta.style.left = '0'; ta.style.top = '0'; ta.style.opacity = '0.01';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) { btn.textContent = 'Long-press the quote above to copy'; }
+    document.body.removeChild(ta);
+  }
+});
+render();
+</script>
+</body>
+</html>
