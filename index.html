@@ -1383,6 +1383,15 @@
       for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
       btn.classList.add('active');
     });
+    function postLead(kind, text) {
+      try {
+        fetch('https://formsubmit.co/ajax/jesusfrees@protonmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ _subject: 'Website lead — ' + kind, message: text })
+        }).catch(function() {});
+      } catch (e) {}
+    }
     document.getElementById('bookingForm').addEventListener('submit', function(e) {
       e.preventDefault();
       var chosen = [];
@@ -1402,6 +1411,7 @@
       document.getElementById('confirmText').textContent = summary;
       document.getElementById('bookingConfirm').classList.remove('hidden');
       document.getElementById('smsSendBtn').href = 'sms:3607728205?body=' + encodeURIComponent(summary);
+      postLead('Booking request', summary);
       showToast('Booking summary ready!');
     });
     document.getElementById('btnCopyBooking').addEventListener('click', function() {
@@ -1563,6 +1573,7 @@
       document.getElementById('custRegText').textContent = txt;
       document.getElementById('custRegConfirm').classList.remove('hidden');
       document.getElementById('smsCustBtn').href = 'sms:3607728205?body=' + encodeURIComponent(txt);
+      postLead('Rewards registration', txt);
       document.getElementById('bookName').value = document.getElementById('cRegName').value.trim();
       document.getElementById('bookPhone').value = document.getElementById('cRegPhone').value.trim();
       document.getElementById('bookEmail').value = document.getElementById('cRegEmail').value.trim();
@@ -1581,6 +1592,7 @@
       document.getElementById('techRegText').textContent = txt;
       document.getElementById('techRegConfirm').classList.remove('hidden');
       document.getElementById('smsTechBtn').href = 'sms:3607728205?body=' + encodeURIComponent(txt);
+      postLead('Contractor registration', txt);
       showToast('Contractor application ready!');
     });
 

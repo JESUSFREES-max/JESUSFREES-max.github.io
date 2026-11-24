@@ -165,6 +165,15 @@
       else { fallback(); }
     });
     function val(id) { var v = document.getElementById(id).value.trim(); return v ? v : '(not given)'; }
+    function postLead(kind, text) {
+      try {
+        fetch('https://formsubmit.co/ajax/jesusfrees@protonmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ _subject: 'Website lead — ' + kind, message: text })
+        }).catch(function() {});
+      } catch (e) {}
+    }
     document.getElementById('applyForm').addEventListener('submit', function(e) {
       e.preventDefault();
       var lines = [
@@ -177,6 +186,7 @@
         'Availability: ' + val('fAvail')
       ];
       document.getElementById('applyMsg').textContent = 'Opening your messaging app with the application filled in — just press send there.';
+      postLead('Careers application', lines.join('\n'));
       window.location.href = 'sms:+13607728205?body=' + encodeURIComponent(lines.join('\n'));
     });
   })();
