@@ -1,7 +1,7 @@
 /* Redemption Mobile Service — service worker
    Strategy: network-first for pages (site updates always show fresh),
    cache-first for static assets (icons, images, manifests). */
-var CACHE = 'rms-cache-v3';
+var CACHE = 'rms-cache-v4';
 var CORE = [
   '/manifest-customer.json',
   '/manifest-contractor.json',
