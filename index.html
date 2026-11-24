@@ -270,6 +270,7 @@
     <button id="navPay" type="button" class="nav-btn">Payments &amp; Donations</button>
     <button id="navPortal" type="button" class="nav-btn">Portals &amp; Calendar</button>
     <button id="navShop" type="button" class="nav-btn">Shop &amp; Gear</button>
+    <button id="navParts" type="button" class="nav-btn">Parts Finder</button>
     <button id="navBuy" type="button" class="nav-btn">We Buy Cars</button>
     <button id="navHybrid" type="button" class="nav-btn">Hybrid Batteries</button>
     <button id="navResources" type="button" class="nav-btn">Free Resources</button>
@@ -686,6 +687,19 @@
   </main>
 
 
+  <!-- VIEW: PARTS FINDER -->
+  <main id="viewParts" class="container hidden">
+    <section class="card">
+      <div class="card-head"><span>Parts Finder — Find the Right Part for Your Vehicle</span><span style="font-size:11.5px; font-weight:600; color:#fbbf24;">Buy the part, De installs it</span></div>
+      <div style="padding:14px 16px;">
+        <p style="margin:0 0 10px;">Enter your vehicle, pick the part you need, and compare prices at stores that carry it. When your part arrives, De comes to you and installs it — the service call is $65. Call or text <a href="tel:+13607728205">360-772-8205</a> to book the install.</p>
+        <p style="margin:0 0 12px;"><a href="https://jesusfrees-max.github.io/redemption-parts-finder/" target="_blank" rel="noopener">Open the Parts Finder in its own tab &#8599;</a></p>
+        <iframe src="https://jesusfrees-max.github.io/redemption-parts-finder/" title="Redemption Parts Finder" style="width:100%; height:1150px; border:1px solid #374151; border-radius:10px; background:#fff;" loading="lazy"></iframe>
+        <p style="margin:12px 0 0; font-size:12px; opacity:.75;">Affiliate disclosure: some links in the Parts Finder are affiliate links. If you buy through them, Redemption Mobile Service may earn a commission at no extra cost to you.</p>
+      </div>
+    </section>
+  </main>
+
   <!-- VIEW 6: WE BUY CARS -->
   <main id="viewBuy" class="container hidden">
     <section class="card">
@@ -996,8 +1010,9 @@
       var navHybrid = document.getElementById('navHybrid'), viewHybrid = document.getElementById('viewHybrid');
       var navResources = document.getElementById('navResources'), viewResources = document.getElementById('viewResources');
       var navGallery = document.getElementById('navGallery');
-      navQuote.classList.remove('active'); navInspect.classList.remove('active'); navPay.classList.remove('active'); navPortal.classList.remove('active'); navShop.classList.remove('active'); navBuy.classList.remove('active'); navHybrid.classList.remove('active'); navResources.classList.remove('active'); navGallery.classList.remove('active');
-      viewQuote.classList.add('hidden'); viewInspect.classList.add('hidden'); viewPay.classList.add('hidden'); viewPortal.classList.add('hidden'); viewShop.classList.add('hidden'); viewBuy.classList.add('hidden'); viewHybrid.classList.add('hidden'); viewResources.classList.add('hidden'); document.getElementById('viewGallery').classList.add('hidden');
+      var navParts = document.getElementById('navParts'), viewParts = document.getElementById('viewParts');
+      navQuote.classList.remove('active'); navInspect.classList.remove('active'); navPay.classList.remove('active'); navPortal.classList.remove('active'); navShop.classList.remove('active'); navBuy.classList.remove('active'); navHybrid.classList.remove('active'); navResources.classList.remove('active'); navGallery.classList.remove('active'); navParts.classList.remove('active');
+      viewQuote.classList.add('hidden'); viewInspect.classList.add('hidden'); viewPay.classList.add('hidden'); viewPortal.classList.add('hidden'); viewShop.classList.add('hidden'); viewBuy.classList.add('hidden'); viewHybrid.classList.add('hidden'); viewResources.classList.add('hidden'); document.getElementById('viewGallery').classList.add('hidden'); viewParts.classList.add('hidden');
       if (which === 'quote') { navQuote.classList.add('active'); viewQuote.classList.remove('hidden'); }
       else if (which === 'inspect') { navInspect.classList.add('active'); viewInspect.classList.remove('hidden'); renderTabs(); renderForm(); }
       else if (which === 'pay') { navPay.classList.add('active'); viewPay.classList.remove('hidden'); updatePayLinks(); }
@@ -1006,6 +1021,7 @@
       else if (which === 'hybrid') { navHybrid.classList.add('active'); viewHybrid.classList.remove('hidden'); renderHybrid(); }
       else if (which === 'resources') { navResources.classList.add('active'); viewResources.classList.remove('hidden'); window.scrollTo(0,0); }
       else if (which === 'gallery') { navGallery.classList.add('active'); document.getElementById('viewGallery').classList.remove('hidden'); window.scrollTo(0,0); }
+      else if (which === 'parts') { navParts.classList.add('active'); viewParts.classList.remove('hidden'); window.scrollTo(0,0); }
       else { navShop.classList.add('active'); viewShop.classList.remove('hidden'); renderShop(); }
       try { history.replaceState(null, '', which === 'quote' ? location.pathname : '?view=' + which); } catch (e) {}
     }
@@ -1014,6 +1030,7 @@
     navPay.addEventListener('click', function() { switchView('pay'); });
     navPortal.addEventListener('click', function() { switchView('portal'); });
     document.getElementById('navShop').addEventListener('click', function() { switchView('shop'); });
+    document.getElementById('navParts').addEventListener('click', function() { switchView('parts'); });
     document.getElementById('navBuy').addEventListener('click', function() { switchView('buy'); });
     document.getElementById('navHybrid').addEventListener('click', function() { switchView('hybrid'); });
     document.getElementById('navResources').addEventListener('click', function() { switchView('resources'); });
