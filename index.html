@@ -179,10 +179,10 @@
       font-family: inherit; font-size: 13px; white-space: pre-wrap; margin: 8px 0;
     }
     /* Inspection Suite Styles */
-    .tab-strip { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 10px; }
+    .tab-strip { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 10px; scrollbar-width: thin; -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent); mask-image: linear-gradient(90deg, #000 92%, transparent); }
     .tab-btn {
       padding: 8px 12px; font-size: 12.5px; font-weight: 700; border-radius: 8px;
-      border: 1.5px solid #cbd5e1; background: #ffffff; color: #0f2439; white-space: nowrap; cursor: pointer;
+      flex: none; border: 1.5px solid #cbd5e1; background: #ffffff; color: #0f2439; white-space: nowrap; cursor: pointer;
     }
     .tab-btn.active { background: #0f2439; border-color: #0f2439; color: #ffffff; box-shadow: 0 2px 0 #b48327; }
     .summary-bar {
@@ -273,6 +273,7 @@
     <button id="navBuy" type="button" class="nav-btn">We Buy Cars</button>
     <button id="navHybrid" type="button" class="nav-btn">Hybrid Batteries</button>
     <button id="navResources" type="button" class="nav-btn">Free Resources</button>
+    <button id="navGallery" type="button" class="nav-btn">📸 Recent Work</button>
   </nav>
 
   <!-- VIEW 1: CUSTOMER QUOTE & BOOKING HOMEPAGE -->
@@ -287,7 +288,7 @@
       <div style="font-size:26px;">📚</div>
       <div style="flex:1; min-width:220px;">
         <div style="font-weight:900; font-size:17px;">FREE Repair Manuals &amp; Owner&rsquo;s Manuals</div>
-        <div style="font-size:13px; opacity:.95;">Factory manuals, Chilton, recall checks, VIN decoder — every link genuinely free. Tap to open the Free Resources page.</div>
+        <div style="font-size:13px; opacity:.95;">Factory manuals, Chilton, recall checks, VIN decoder — free to use. Tap to open the Free Resources page.</div>
       </div>
       <div style="font-weight:900; font-size:15px; background:#0f2439; padding:9px 16px; border-radius:8px;">OPEN &rarr;</div>
     </div>
@@ -532,7 +533,7 @@
             <div class="btn-row"><button type="button" data-copy="zelle" class="btn-navy" style="font-size:12px; padding:7px 10px;">Copy Zelle Email</button></div>
           </div>
           <div class="pay-card">
-            <div><span class="pay-badge" style="background:#003087;">PAYPAL / PAY IN 4</span><div style="font-size:14px; font-weight:800; margin-top:6px;" id="dispPayPal">paypal.me/RedemptionMobileServ</div><div style="font-size:12px; color:#64748b;">PayPal, Credit, Debit, or Pay in 4</div></div>
+            <div><span class="pay-badge" style="background:#003087;">PAYPAL / PAY IN 4</span><div style="font-size:13px; font-weight:800; margin-top:6px; overflow-wrap:anywhere;" id="dispPayPal">paypal.me/RedemptionMobileServ</div><div style="font-size:12px; color:#64748b;">PayPal, Credit, Debit, or Pay in 4</div></div>
             <div class="btn-row"><a id="linkPayPal" href="https://paypal.me/RedemptionMobileServ/95" target="_blank" rel="noopener" class="btn-navy" style="text-decoration:none; font-size:12px; padding:7px 10px;">Pay w/ PayPal</a></div>
           </div>
         </div>
@@ -717,6 +718,7 @@
             <div class="flex-gap"><input id="buyWeight" type="number" min="0" step="50" value="3300" placeholder="e.g. 3000"><span style="font-size:12px; color:#64748b; white-space:nowrap;">= <span id="buyTons">0.00</span> tons</span></div>
             <div class="btn-row" style="margin-top:8px;">
               <button type="button" class="amt-btn buy-wt" data-lbs="2600" style="padding:6px 10px; font-size:12px;">Compact ~2,600</button>
+              <button type="button" class="amt-btn buy-wt" data-lbs="2600" style="padding:6px 10px; font-size:12px;">Compact ~2,600</button>
               <button type="button" class="amt-btn buy-wt" data-lbs="3300" style="padding:6px 10px; font-size:12px;">Sedan ~3,300</button>
               <button type="button" class="amt-btn buy-wt" data-lbs="4500" style="padding:6px 10px; font-size:12px;">SUV ~4,500</button>
               <button type="button" class="amt-btn buy-wt" data-lbs="5500" style="padding:6px 10px; font-size:12px;">Truck ~5,500</button>
@@ -762,7 +764,7 @@
       <div class="card-head">Hybrid &amp; EV Batteries — Diagnose &rarr; Choose &rarr; We Install</div>
       <div class="card-body">
         <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center;">
-          <img src="https://www.exclusivelyhybrid.com/wp-content/uploads/2022/08/Prius-Gen3_pic2-scaled-11-768x576.jpg" alt="Hybrid battery pack" loading="lazy" onerror="this.style.display='none'" style="width:300px; max-width:100%; height:190px; object-fit:cover; border-radius:10px;">
+          <img src="assets/img-priuspack.jpg" alt="Hybrid battery pack" loading="lazy" onerror="this.style.display='none'" style="width:300px; max-width:100%; height:190px; object-fit:cover; border-radius:10px;">
           <div style="flex:1; min-width:250px;">
             <div style="font-weight:900; font-size:17px; color:#0f2439;">Red triangle of death? Code P0A80? MPG dropping?</div>
             <p style="font-size:13.5px; color:#334155; line-height:1.55; margin:6px 0;">Don&rsquo;t guess a $2,000 battery. Start with our <strong>$65 Hybrid Battery Health Check</strong> — we come to you, scan every battery block, test the cooling fan and 12V battery, and tell you honestly whether you need a pack, a fan, a 12V battery, or nothing at all.</p>
@@ -855,9 +857,9 @@
 
   <main id="viewResources" class="container hidden">
     <section class="card">
-      <div class="card-head">Free Repair Manuals &amp; Car Resources — Genuinely Free</div>
+      <div class="card-head">Free Repair Manuals &amp; Car Resources</div>
       <div class="card-body">
-        <p style="font-size:14px; color:#334155; line-height:1.6; margin:0 0 6px;">Every link on this page is <strong>actually free</strong> — no trials, no signup scams. We put it together for DIYers around Clackamas, Beaverton, Gresham &amp; Vancouver. And when a job turns out bigger than the driveway, <strong>we come to you</strong>.</p>
+        <p style="font-size:14px; color:#334155; line-height:1.6; margin:0 0 6px;">The tools on this page are <strong>free to use</strong> — library resources, government sites and community manuals, no signup scams. One card below (Scribd) is a subscription service, and it is labeled that way honestly. We put it together for DIYers around Clackamas, Beaverton, Gresham &amp; Vancouver. And when a job turns out bigger than the driveway, <strong>we come to you</strong>.</p>
         <p style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:10px 0 0;">
           <button type="button" id="btnCopyResources" style="background:#b48327; color:#fff; border:none; padding:9px 16px; border-radius:8px; font-weight:800; cursor:pointer; font-size:14px;">🔗 Copy Link to This Page</button>
           <span id="copyResMsg" style="font-size:13px; color:#166534; font-weight:700;"></span>
@@ -954,7 +956,7 @@
     <div class="card" style="text-align:center;">
       <div style="font-weight:700; margin-bottom:6px;">Need this kind of help at your place?</div>
       <a class="btn call" href="tel:+13607728205">📞 Call / Text 360-772-8205</a>
-      <button class="btn ghost" onclick="switchView('quote')">← Back to Home</button>
+      <button type="button" class="btn ghost" onclick="switchView('quote')">← Back to Home</button>
     </div>
   </main>
 
@@ -989,7 +991,8 @@
       var navBuy = document.getElementById('navBuy'), viewBuy = document.getElementById('viewBuy');
       var navHybrid = document.getElementById('navHybrid'), viewHybrid = document.getElementById('viewHybrid');
       var navResources = document.getElementById('navResources'), viewResources = document.getElementById('viewResources');
-      navQuote.classList.remove('active'); navInspect.classList.remove('active'); navPay.classList.remove('active'); navPortal.classList.remove('active'); navShop.classList.remove('active'); navBuy.classList.remove('active'); navHybrid.classList.remove('active'); navResources.classList.remove('active');
+      var navGallery = document.getElementById('navGallery');
+      navQuote.classList.remove('active'); navInspect.classList.remove('active'); navPay.classList.remove('active'); navPortal.classList.remove('active'); navShop.classList.remove('active'); navBuy.classList.remove('active'); navHybrid.classList.remove('active'); navResources.classList.remove('active'); navGallery.classList.remove('active');
       viewQuote.classList.add('hidden'); viewInspect.classList.add('hidden'); viewPay.classList.add('hidden'); viewPortal.classList.add('hidden'); viewShop.classList.add('hidden'); viewBuy.classList.add('hidden'); viewHybrid.classList.add('hidden'); viewResources.classList.add('hidden'); document.getElementById('viewGallery').classList.add('hidden');
       if (which === 'quote') { navQuote.classList.add('active'); viewQuote.classList.remove('hidden'); }
       else if (which === 'inspect') { navInspect.classList.add('active'); viewInspect.classList.remove('hidden'); renderTabs(); renderForm(); }
@@ -998,7 +1001,7 @@
       else if (which === 'buy') { navBuy.classList.add('active'); viewBuy.classList.remove('hidden'); calcBuy(); }
       else if (which === 'hybrid') { navHybrid.classList.add('active'); viewHybrid.classList.remove('hidden'); renderHybrid(); }
       else if (which === 'resources') { navResources.classList.add('active'); viewResources.classList.remove('hidden'); window.scrollTo(0,0); }
-      else if (which === 'gallery') { document.getElementById('viewGallery').classList.remove('hidden'); window.scrollTo(0,0); }
+      else if (which === 'gallery') { navGallery.classList.add('active'); document.getElementById('viewGallery').classList.remove('hidden'); window.scrollTo(0,0); }
       else { navShop.classList.add('active'); viewShop.classList.remove('hidden'); renderShop(); }
       try { history.replaceState(null, '', which === 'quote' ? location.pathname : '?view=' + which); } catch (e) {}
     }
@@ -1010,6 +1013,7 @@
     document.getElementById('navBuy').addEventListener('click', function() { switchView('buy'); });
     document.getElementById('navHybrid').addEventListener('click', function() { switchView('hybrid'); });
     document.getElementById('navResources').addEventListener('click', function() { switchView('resources'); });
+    document.getElementById('navGallery').addEventListener('click', function() { switchView('gallery'); });
 
 
     // ================= WE BUY CARS LOGIC =================
@@ -1069,7 +1073,7 @@
       { id: 'hybrid_check', cat: 'Diagnostics & Inspections', name: 'Hybrid Battery Health Check', hrs: 0.5, parts: 0, query: 'hybrid battery diagnostic' },
     ];
     var SERVICE_CALL_FEE = 65;
-    var selectedIds = { brakes_f: true };
+    var selectedIds = {};
     var partNums = {};
     var selectedSlot = 'Morning (8AM–11AM)';
     var amazonTag = 'redemptionm06-20';
@@ -1235,8 +1239,18 @@
         if (credit) html += '<div style="color:#15803d;"><strong>Diagnosis Credit (repair labor $300+): −$' + credit.toFixed(2) + '</strong> — your diagnosis goes toward the job</div>';
         if (!vehKnown) { html += '<div style="font-size:16px; margin-top:6px;">Estimated Total: <strong>$' + Math.round(total * 0.9) + ' – $' + Math.round(total * 1.15) + '</strong></div><div style="font-size:11.5px; color:#64748b;">General range — enter your vehicle above for an exact figure.</div>'; }
         else { html += '<div style="font-size:16px; margin-top:6px;">Estimated Total: <strong>$' + total.toFixed(2) + '</strong></div>'; }
+        var selExtra = Object.keys(selectedIds).filter(function(k) { return selectedIds[k] && matched.indexOf(k) === -1; });
+        if (selExtra.length) {
+          var uHrs = 0, uParts = 0, uDiag = 0, uRep = 0, uSeen = {};
+          matched.concat(selExtra).forEach(function(id) { if (uSeen[id]) return; uSeen[id] = true; var s = aiSvc(id); if (!s) return; var lab = Math.round(s.hrs * mult * LABOR_RATE); uHrs += s.hrs; uParts += s.parts; if (id === 'diag') uDiag = lab; else uRep += lab; });
+          var uLabor = Math.round(uHrs * mult * LABOR_RATE);
+          var uCredit = (uDiag > 0 && uRep >= 300) ? uDiag : 0;
+          var uTotal = SERVICE_CALL_FEE + uLabor + uParts - uCredit;
+          if (!vehKnown) { html += '<div style="margin-top:6px; color:#0f2439;">Combined with the ' + selExtra.length + ' service' + (selExtra.length > 1 ? 's' : '') + ' already in your quote: <strong>$' + Math.round(uTotal * 0.9) + ' \u2013 $' + Math.round(uTotal * 1.15) + '</strong> together (one service call).</div>'; }
+          else { html += '<div style="margin-top:6px; color:#0f2439;">Combined with the ' + selExtra.length + ' service' + (selExtra.length > 1 ? 's' : '') + ' already in your quote: <strong>$' + uTotal.toFixed(2) + '</strong> together (one service call).</div>'; }
+        }
         notes.forEach(function(n) { html += '<div style="margin-top:6px; color:#475569;">' + n + '</div>'; });
-        html += '<div class="btn-row" style="margin-top:10px;"><button type="button" id="aiAddBtn" class="btn-navy">Add These to My Quote</button> <a id="aiSmsBtn" href="#" class="btn-gold" style="text-decoration:none; display:inline-block;">Text This Request to De</a></div>';
+        html += '<div class="btn-row" style="margin-top:10px;"><button type="button" id="aiAddBtn" class="btn-navy">Add These to My Quote</button> <a id="aiSmsBtn" href="#" class="btn-gold" style="text-decoration:none; display:inline-block; white-space:normal; text-align:center;">Text This Request to De</a></div>';
         html += '<div style="font-size:11.5px; color:#64748b; margin-top:6px;">Smart estimate from your description — exact price is always confirmed on-site before work begins.</div>';
         box.innerHTML = html;
         smsLines.push('Assistant estimate: $' + total.toFixed(2) + ' (' + matched.map(function(id) { var s = aiSvc(id); return s ? s.name : id; }).join('; ') + ')');
@@ -1266,7 +1280,7 @@
         html += '<div style="margin-top:6px; color:#475569;">Or text De your request in your own words — he answers personally.</div>';
         smsLines.push('Assistant note: needs diagnostic / owner quote');
       }
-      html += '<div class="btn-row" style="margin-top:10px;"><a id="aiSmsBtn" href="#" class="btn-gold" style="text-decoration:none; display:inline-block;">Text This Request to De</a></div>';
+      html += '<div class="btn-row" style="margin-top:10px;"><a id="aiSmsBtn" href="#" class="btn-gold" style="text-decoration:none; display:inline-block; white-space:normal; text-align:center;">Text This Request to De</a></div>';
       box.innerHTML = html;
       document.getElementById('aiSmsBtn').href = 'sms:3607728205?body=' + encodeURIComponent(smsLines.join('\n'));
     }
@@ -1565,16 +1579,16 @@
     });
 
     var SHOP_ITEMS = [
-      { cat: 'Diagnostics', name: 'XTOOL D7 Bidirectional Scan Tool', desc: "🧰 From De's own toolbox — the scanner he personally runs on the job: full-system diagnostics, bidirectional active tests, ECU coding, 36+ reset services, CAN FD for newer vehicles.", q: 'XTOOL D7 bidirectional scan tool OBD2 scanner', asin: 'B098LF38DS', img: '', fav: true },
-      { cat: 'Diagnostics', name: 'TOPDON BT200 Battery Tester', desc: 'Vetted pick: accurate CCA, cranking & charging tests with printout.', q: 'TOPDON BT200 battery tester alternator', asin: 'B08CMPY86M', img: 'https://assets.expondo.com/asset/product_photos/10030966_photo_1', fav: false },
+      { cat: 'Diagnostics', name: 'XTOOL D7 Bidirectional Scan Tool', desc: "🧰 From De's own toolbox — the scanner he personally runs on the job: full-system diagnostics, bidirectional active tests, ECU coding, 36+ reset services, CAN FD for newer vehicles.", q: 'XTOOL D7 bidirectional scan tool OBD2 scanner', asin: 'B098LF38DS', img: 'assets/img-xtool.jpg', fav: true },
+      { cat: 'Diagnostics', name: 'TOPDON BT200 Battery Tester', desc: 'Vetted pick: accurate CCA, cranking & charging tests with printout.', q: 'TOPDON BT200 battery tester alternator', asin: 'B08CMPY86M', img: 'assets/img-topdon.jpg', fav: false },
       { cat: 'Diagnostics', name: 'Fluke 87V Multimeter', desc: "🧰 From De's own toolbox — the meter he personally runs: CAT III 1000V rated, lifetime warranty, the pro standard.", q: 'Fluke 87V industrial multimeter', asin: 'B0002YFD1K', img: 'https://m.media-amazon.com/images/I/61EeHlvZQPL.jpg', fav: true },
       { cat: 'Roadside', name: 'NOCO Boost X GBX155 Jump Starter', desc: 'Vetted pick: honest 4250A rating, spark-proof, starts up to 10.0L gas.', q: 'NOCO Boost X GBX155 4250A jump starter', asin: 'B08WZFPXFM', img: 'https://m.media-amazon.com/images/I/71XyAB8+hXL.jpg_BO30,255,255,255_UF750,750_SR1910,1000,0,C_QL100_.jpg', fav: true },
-      { cat: 'Roadside', name: 'Hercules 20V Cordless Inflator', desc: "🧰 From De's own toolbox — the inflator he personally runs on roadside calls: tops off truck tires on the spot, no compressor needed.", q: 'Hercules 20V cordless inflator Harbor Freight', img: '', fav: true },
-      { cat: 'Roadside', name: 'Hercules 20V LED Work Light', desc: "🧰 From De's own toolbox — lights up an engine bay on night calls, runs on the same 20V batteries as his other Hercules tools.", q: 'Hercules 20V LED work light Harbor Freight', img: '', fav: false },
-      { cat: 'Tools', name: 'Hercules 20V Brushless High-Torque Impact Wrench', desc: "🧰 From De's own toolbox — the 1/2-inch impact he personally breaks lug nuts and crank bolts with, day in and day out.", q: 'Hercules 20V brushless high torque impact wrench 1/2 inch Harbor Freight', img: '', fav: true },
-      { cat: 'Tools', name: 'Daytona 3T Super Duty Jack & ESCO Stands', desc: 'Vetted pick: the Snap-on-clone jack pros buy + pinch-weld-safe stands.', q: 'Daytona 3 ton low profile super duty floor jack', asin: 'B09DXLPNMF', img: 'https://cdn.carpassionate.com/app/uploads/2019/02/use-a-floor-jack.jpg', fav: true },
-      { cat: 'Tools', name: 'GearWrench 80944 Master Mechanics Tool Set', desc: "🧰 From De's own toolbox — the socket set he personally works with: 90-tooth ratchets, no skipped sizes, lifetime warranty.", q: 'GearWrench 80944 master mechanics tool set', asin: 'B078Z31D32', img: 'https://i.ebayimg.com/images/g/vPAAAeSwLqJqCkv6/s-l1600.jpg', fav: true },
-      { cat: 'Maintenance', name: 'Mityvac MV8000 Brake Bleeder', desc: 'Vetted pick: the original vacuum bleeder whose seals actually last.', q: 'Mityvac MV8000 vacuum brake bleeder kit', asin: 'B00265M9SS', img: 'https://cimg1.ibsrv.net/gimg/www.corvetteforum.com-vbulletin/989x1471/brake_bleader_b802f020de62bcfba86e8f9ace498424d0ac6882.jpg', fav: false },
+      { cat: 'Roadside', name: 'Hercules 20V Cordless Inflator', desc: "🧰 From De's own toolbox — the inflator he personally runs on roadside calls: tops off truck tires on the spot, no compressor needed.", q: 'Hercules 20V cordless inflator Harbor Freight', img: 'assets/img-hercinflator.jpg', fav: true },
+      { cat: 'Roadside', name: 'Hercules 20V LED Work Light', desc: "🧰 From De's own toolbox — lights up an engine bay on night calls, runs on the same 20V batteries as his other Hercules tools.", q: 'Hercules 20V LED work light Harbor Freight', img: 'assets/img-herclight.jpg', fav: false },
+      { cat: 'Tools', name: 'Hercules 20V Brushless High-Torque Impact Wrench', desc: "🧰 From De's own toolbox — the 1/2-inch impact he personally breaks lug nuts and crank bolts with, day in and day out.", q: 'Hercules 20V brushless high torque impact wrench 1/2 inch Harbor Freight', img: 'assets/img-hercimpact.jpg', fav: true },
+      { cat: 'Tools', name: 'Daytona 3T Super Duty Jack & ESCO Stands', desc: 'Vetted pick: the Snap-on-clone jack pros buy + pinch-weld-safe stands.', q: 'Daytona 3 ton low profile super duty floor jack', asin: 'B09DXLPNMF', img: 'assets/img-jack.jpg', fav: true },
+      { cat: 'Tools', name: 'GearWrench 80944 Master Mechanics Tool Set', desc: "🧰 From De's own toolbox — the socket set he personally works with: 90-tooth ratchets, no skipped sizes, lifetime warranty.", q: 'GearWrench 80944 master mechanics tool set', asin: 'B078Z31D32', img: 'assets/img-gearwrench.jpg', fav: true },
+      { cat: 'Maintenance', name: 'Mityvac MV8000 Brake Bleeder', desc: 'Vetted pick: the original vacuum bleeder whose seals actually last.', q: 'Mityvac MV8000 vacuum brake bleeder kit', asin: 'B00265M9SS', img: 'assets/img-mityvac.jpg', fav: false },
       { cat: 'Maintenance', name: 'AMMEX Gloveworks HD 8-Mil Gloves', desc: 'Vetted pick: true 8-mil with diamond texture — survives brake cleaner.', q: 'Gloveworks HD 8 mil nitrile gloves', asin: 'B00MGSGN46', img: 'https://m.media-amazon.com/images/I/510aCdzHaxL._SL500_.jpg', fav: false },
       { cat: 'Maintenance', name: 'Castrol EDGE Extended Performance 0W-20 (5 QT)', desc: "🧰 From De's own toolbox — the oil De prefers to install: Fluid Titanium formula, rated up to 25,000 miles between changes. Best price found Nov 23: $33.97 at Walmart.", q: 'Castrol EDGE Extended Performance 0W-20 5 quart', asin: 'B0DGVBJFDW', img: 'https://m.media-amazon.com/images/I/61PlD1qZ5bL.jpg', fav: false },
       { cat: 'Maintenance', name: 'Castrol EDGE Extended Performance 5W-20 (5 QT)', desc: "🧰 From De's own toolbox — the oil De prefers to install: Fluid Titanium formula, rated up to 25,000 miles between changes. Best price found Nov 23: $33.97 at Walmart.", q: 'Castrol EDGE Extended Performance 5W-20 5 quart', asin: 'B00JGQM1WO', img: 'https://m.media-amazon.com/images/I/61Lt6QKbZOL.jpg', fav: false },
@@ -1585,7 +1599,7 @@
       { cat: 'Maintenance', name: 'AMSOIL Signature Series 0W-20', desc: "Premium tier: AMSOIL Signature Series 100% synthetic — the lineup that won the 16-oil independent test, rated up to 25,000 miles in normal service. De installs it — text to book your AMSOIL oil change.", q: 'AMSOIL Signature Series 0W-20', img: 'assets/amsoil-0w20.jpg', fav: false, direct: 'sms', tag: 'PREMIUM TIER' },
       { cat: 'Maintenance', name: 'AMSOIL Signature Series 5W-20', desc: "Premium tier: AMSOIL Signature Series 100% synthetic — the lineup that won the 16-oil independent test, rated up to 25,000 miles in normal service. De installs it — text to book your AMSOIL oil change.", q: 'AMSOIL Signature Series 5W-20', img: 'assets/amsoil-5w20.jpg', fav: false, direct: 'sms', tag: 'PREMIUM TIER' },
       { cat: 'Maintenance', name: 'AMSOIL Signature Series 5W-30', desc: "Premium tier: AMSOIL Signature Series 100% synthetic — the exact grade that won the 16-oil independent test, rated up to 25,000 miles in normal service. De installs it — text to book your AMSOIL oil change.", q: 'AMSOIL Signature Series 5W-30', img: 'assets/amsoil-5w30.jpg', fav: false, direct: 'sms', tag: 'PREMIUM TIER — TEST WINNER' },
-      { cat: 'Apparel', name: 'Red Kap Mechanic Work Shirts', desc: 'Vetted pick: what dealership techs wear — soil-release ripstop.', q: 'Red Kap automotive work shirt mechanic', img: 'https://s.turbifycdn.com/aah/yhst-54326505879580/sy20ng-navy-grey-short-sleeve-crew-shirt-117.jpg', fav: false }
+      { cat: 'Apparel', name: 'Red Kap Mechanic Work Shirts', desc: 'Vetted pick: what dealership techs wear — soil-release ripstop.', q: 'Red Kap automotive work shirt mechanic', img: 'assets/img-redkap.jpg', fav: false }
     ];
     var activeShopCat = 'All';
 
@@ -1658,17 +1672,17 @@
     var HYBRID_ITEMS = [
       { name: 'OWON SPE50025 Lab Power Supply (500V)', desc: "🧰 From De's own toolbox — the bench supply he personally bought and uses as a grid charger to balance & recondition hybrid battery packs: 0–500V programmable, 0.05% precision voltage/current control.", q: 'OWON SPE50025 lab power supply 500V', asin: 'B0H792C7KG', img: 'https://m.media-amazon.com/images/I/414qV60mNML._SR600%2c315_PIWhiteStrip.jpg', store: 'amazon' },
       { name: 'Veepeak OBDCheck BLE+ Adapter', desc: 'Vetted pick: the adapter Dr. Prius officially recommends — clones drop scans.', q: 'Veepeak OBDCheck BLE+ bluetooth OBD2 scanner', asin: 'B076XVQMVS', img: 'https://m.media-amazon.com/images/I/71Po6EG5IvL.jpg', store: 'amazon' },
-      { name: 'BlueDriver Pro OBD2 Scanner', desc: 'Vetted pick: licensed Toyota/Lexus hybrid diagnostics, no subscription.', q: 'BlueDriver Pro bluetooth OBD2 scanner', asin: 'B00652G4TS', img: '', store: 'amazon' },
-      { name: 'Maxx Volts Grid Charger Kit', desc: 'Vetted pick: US-made, vehicle-specific harnesses, actively supported.', q: 'Maxx Volts hybrid battery grid charger', noamz: true, img: '', store: 'ebay' },
-      { name: 'SkyRC B6AC Neo Charger-Analyzer', desc: 'Vetted pick: the genuine B6 platform — beware counterfeit IMAX clones.', q: 'SkyRC B6AC Neo charger analyzer', asin: 'B0CV64ZB2L', img: '', store: 'amazon' },
-      { name: 'Tested Prius NiMH Battery Modules', desc: 'Vetted route: capacity-tested modules from established hybrid sellers on eBay.', q: 'Prius hybrid battery module tested', noamz: true, img: 'https://www.exclusivelyhybrid.com/wp-content/uploads/2022/08/Prius-Gen3_pic2-scaled-11-768x576.jpg', store: 'ebay' },
-      { name: 'Nickel-Plated Bus Bar Kit (Prius)', desc: 'Plated copper bars — the permanent fix for corrosion voltage errors.', q: 'Prius nickel plated bus bar kit hybrid battery', asin: 'B0B7HTG7SP', img: '', store: 'amazon' },
-      { name: 'Prius Hybrid Cooling Fan + Dorman Filter', desc: 'Vetted pick: OEM-class fan + Dorman 926-603 washable fan filter.', q: 'Prius hybrid battery cooling fan 2010-2015', img: '', store: 'amazon' },
-      { name: 'Optima YellowTop DS46B24R 12V Battery', desc: 'Vetted pick: exact-fit AGM for Gen 2/3 Prius — right posts, right vent.', q: 'Optima YellowTop DS46B24R Prius battery', asin: 'B006VFEJJQ', img: '', store: 'amazon' },
-      { name: 'TOPDON BT200 Battery Tester', desc: 'Vetted pick: rule out the cheap fix first — accurate CCA & charging tests.', q: 'TOPDON BT200 battery tester alternator', asin: 'B08CMPY86M', img: 'https://assets.expondo.com/asset/product_photos/10030966_photo_1', store: 'amazon' },
-      { name: 'Salisbury Class 0 HV Glove Kit', desc: 'Vetted pick: ASTM-rated 1000V gloves with test certification. Life-safety gear.', q: 'Salisbury Class 0 insulated glove kit 1000V', img: 'https://www.fmoser.at/out/pictures/master/product/3/BGS7136_3.jpg', store: 'amazon' },
-      { name: 'Wiha 1000V Insulated Tool Set', desc: 'Vetted pick: each tool tested to 10,000V, IEC 60900 certified.', q: 'Wiha insulated tool set 1000V 32800', asin: 'B007HGNXI6', img: '', store: 'amazon' },
-      { name: 'Lectron 40A Portable EV Charger', desc: 'Vetted pick: UL-listed J1772 Level 2 — never buy an unlisted EV charger.', q: 'Lectron portable level 2 EV charger 40 amp J1772', asin: 'B0BXP2JB64', img: 'https://vectisholidayhomes.co.uk/wp-content/uploads/2023/04/EV-Charging.jpg', store: 'amazon' }
+      { name: 'BlueDriver Pro OBD2 Scanner', desc: 'Vetted pick: licensed Toyota/Lexus hybrid diagnostics, no subscription.', q: 'BlueDriver Pro bluetooth OBD2 scanner', asin: 'B00652G4TS', img: 'assets/img-bluedriver.jpg', store: 'amazon' },
+      { name: 'Maxx Volts Grid Charger Kit', desc: 'Vetted pick: US-made, vehicle-specific harnesses, actively supported.', q: 'Maxx Volts hybrid battery grid charger', noamz: true, img: 'assets/img-maxxvolts.jpg', store: 'ebay' },
+      { name: 'SkyRC B6AC Neo Charger-Analyzer', desc: 'Vetted pick: the genuine B6 platform — beware counterfeit IMAX clones.', q: 'SkyRC B6AC Neo charger analyzer', asin: 'B0CV64ZB2L', img: 'assets/img-skyrc.jpg', store: 'amazon' },
+      { name: 'Tested Prius NiMH Battery Modules', desc: 'Vetted route: capacity-tested modules from established hybrid sellers on eBay.', q: 'Prius hybrid battery module tested', noamz: true, img: 'assets/img-priuspack.jpg', store: 'ebay' },
+      { name: 'Nickel-Plated Bus Bar Kit (Prius)', desc: 'Plated copper bars — the permanent fix for corrosion voltage errors.', q: 'Prius nickel plated bus bar kit hybrid battery', asin: 'B0B7HTG7SP', img: 'assets/img-busbar.jpg', store: 'amazon' },
+      { name: 'Prius Hybrid Cooling Fan + Dorman Filter', desc: 'Vetted pick: OEM-class fan + Dorman 926-603 washable fan filter.', q: 'Prius hybrid battery cooling fan 2010-2015', img: 'assets/img-fan-tile.jpg', store: 'amazon' },
+      { name: 'Optima YellowTop DS46B24R 12V Battery', desc: 'Vetted pick: exact-fit AGM for Gen 2/3 Prius — right posts, right vent.', q: 'Optima YellowTop DS46B24R Prius battery', asin: 'B006VFEJJQ', img: 'assets/img-optima.jpg', store: 'amazon' },
+      { name: 'TOPDON BT200 Battery Tester', desc: 'Vetted pick: rule out the cheap fix first — accurate CCA & charging tests.', q: 'TOPDON BT200 battery tester alternator', asin: 'B08CMPY86M', img: 'assets/img-topdon.jpg', store: 'amazon' },
+      { name: 'Salisbury Class 0 HV Glove Kit', desc: 'Vetted pick: ASTM-rated 1000V gloves with test certification. Life-safety gear.', q: 'Salisbury Class 0 insulated glove kit 1000V', img: 'assets/img-salisbury.jpg', store: 'amazon' },
+      { name: 'Wiha 1000V Insulated Tool Set', desc: 'Vetted pick: each tool tested to 10,000V, IEC 60900 certified.', q: 'Wiha insulated tool set 1000V 32800', asin: 'B007HGNXI6', img: 'assets/img-wiha.jpg', store: 'amazon' },
+      { name: 'Lectron 40A Portable EV Charger', desc: 'Vetted pick: UL-listed J1772 Level 2 — never buy an unlisted EV charger.', q: 'Lectron portable level 2 EV charger 40 amp J1772', asin: 'B0BXP2JB64', img: 'assets/img-lectron.jpg', store: 'amazon' }
     ];
     function renderHybrid() {
       buildHybridTools();
@@ -1822,6 +1836,7 @@
     }
     function fitTierBox(title, body, color) {
       if (!body) return "";
+      if (body.indexOf('$') === -1) body += '<br><span style="font-weight:700; color:#0f2439;">Installed price quoted by De — call/text 360-772-8205.</span>';
       return '<div class="trust-box"><div class="trust-title" style="color:' + color + ';">' + title + '</div><div class="trust-sub">' + body + '</div></div>';
     }
     function fitRenderRow(row, extraLine) {
@@ -2210,7 +2225,7 @@
       }
       if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(done, fallback); } else { fallback(); }
     }
-    ['Quote', 'Inspect', 'Pay', 'Portal', 'Shop', 'Buy', 'Hybrid', 'Gallery'].forEach(function (name) {
+    ['Quote', 'Inspect', 'Pay', 'Portal', 'Shop', 'Buy', 'Hybrid', 'Resources', 'Gallery'].forEach(function (name) {
       var view = document.getElementById('view' + name); if (!view) return;
       var key = name.toLowerCase();
       var url = 'https://jesusfrees-max.github.io/' + (key === 'quote' ? '' : '?view=' + key);
