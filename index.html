@@ -321,7 +321,7 @@
             <div class="btn-row" style="margin-top:2px; margin-bottom:6px;">
               <a href="https://www.lookupaplate.com/" target="_blank" rel="noopener" class="btn-gold" style="padding:8px 11px;">1. Open LookupAPlate</a>
               <a href="https://www.nhtsa.gov/recalls" target="_blank" rel="noopener" class="slot-btn" style="text-decoration:none; padding:8px 10px;">NHTSA Recalls</a>
-              <a id="linkVinReport" href="https://www.vinaudit.com/" target="_blank" rel="noopener" class="slot-btn" style="text-decoration:none; padding:8px 10px; border-color:#b48327;">History Report</a>
+              <a id="linkVinReport" href="https://www.nicb.org/vincheck" target="_blank" rel="noopener" class="slot-btn" style="text-decoration:none; padding:8px 10px; border-color:#b48327;">Free VIN Check (NICB)</a>
             </div>
             <input id="quickPasteVeh" type="text" placeholder="2. Paste or type result here (e.g. 2020 FORD Transit)" style="padding:6px 9px; font-size:12.5px;">
             </details>
@@ -505,7 +505,7 @@
         <p id="paySubtitle" style="font-size:13px; color:#475569; margin:0 0 10px 0;">Enter your invoice amount or choose a preset below, then pick any payment method.</p>
         <div class="btn-row" id="amtPresets" style="margin-bottom:12px;">
           <button type="button" data-amt="50" class="amt-btn">$50</button>
-          <button type="button" data-amt="149" class="amt-btn">$149 PPI Bundle</button>
+          <button type="button" data-amt="149" class="amt-btn">$149 Pre-Purchase Inspection</button>
           <button type="button" data-amt="150" class="amt-btn">$150 Diag</button>
           <button type="button" data-amt="250" class="amt-btn">$250</button>
           <button type="button" data-amt="500" class="amt-btn">$500</button>
@@ -1071,7 +1071,7 @@
       { id: 'bearing', cat: 'Suspension & Steering', name: 'Wheel Bearing Replacement', hrs: 1.5, parts: 140, query: 'wheel hub bearing assembly' },
       { id: 'cv_axle', cat: 'Suspension & Steering', name: 'CV Axle Replacement', hrs: 1.25, parts: 150, query: 'cv axle shaft' },
       { id: 'tie_rod', cat: 'Suspension & Steering', name: 'Tie Rod End Replacement', hrs: 0.75, parts: 70, query: 'tie rod end' },
-      { id: 'ppi_bundle', cat: 'Diagnostics & Inspections', name: 'Pre-Purchase Inspection + History Check', hrs: 1.0, parts: 0, query: 'OBD2 scanner' },
+      { id: 'ppi_bundle', cat: 'Diagnostics & Inspections', name: 'Pre-Purchase Inspection', hrs: 1.0, parts: 0, query: 'OBD2 scanner' },
       { id: 'diag', cat: 'Diagnostics & Inspections', name: 'Full Diagnostic — Check Engine / No-Start / Electrical (up to 1 hr of testing)', hrs: 1.0, parts: 0, query: 'OBD2 scanner' },
       { id: 'brake_insp', cat: 'Diagnostics & Inspections', name: 'Brake Inspection (All 4 Wheels)', hrs: 0.5, parts: 0, query: 'brake inspection tools' },
       { id: 'hybrid_check', cat: 'Diagnostics & Inspections', name: 'Hybrid Battery Health Check', hrs: 0.5, parts: 0, query: 'hybrid battery diagnostic' },
@@ -1169,7 +1169,7 @@
 
     // ================= AI ASSISTANT — CUSTOM JOB CALCULATOR =================
     var AI_RULES = [
-      { keys: ['pre-purchase', 'pre purchase', 'buying a car', 'buying this car', 'inspection before i buy', 'used car inspection'], ids: ['ppi_bundle'], note: 'A pre-purchase inspection with a history check — smart move before money changes hands.' },
+      { keys: ['pre-purchase', 'pre purchase', 'buying a car', 'buying this car', 'inspection before i buy', 'used car inspection'], ids: ['ppi_bundle'], note: 'A pre-purchase inspection — smart move before money changes hands. The free NICB theft/total-loss and NHTSA recall checks run with it.' },
       { keys: ['hybrid battery', 'traction battery', 'p0a80', 'red triangle', 'prius battery'], ids: ['hybrid_check'], note: 'Hybrid battery concern — the health check reads the pack\'s real condition before you spend big on a replacement.' },
       { keys: ['check engine', 'engine light', 'misfire', 'stall', 'rough idle', 'cranks but', 'crank but', 'diagnos', 'trouble code', ' obd', 'electrical problem', 'wiring issue'], ids: ['diag'], note: 'This needs a proper diagnostic first, so we fix the right thing instead of guessing with parts.' },
       { keys: ["won't start", 'wont start', 'will not start', 'no start', 'not starting', 'doesn\'t start', 'dead and won\'t'], ids: ['diag'], note: 'A no-start needs diagnosis first — battery, starter, alternator and fuel all get tested before we quote the repair.' },
@@ -1985,7 +1985,7 @@
         id: 'p172', tab: '172-Point Ford Certified', title: '172-POINT FORD CERTIFIED',
         fields: [['cust_name','Customer Name'],['cust_phone','Phone'],['date_time','Date / Time'],['vehicle','Year / Make / Model'],['mileage','Mileage'],['vin','VIN'],['plate','Plate'],['tech','Technician']],
         sections: [
-          { title: '1. Vehicle History (1–5)', items: ['1. VIN Inspection','2. Service Recalls (OASIS) Performed','3. Vehicle History Report Obtained','4. Scheduled Maintenance Performed','5. Vehicle Emissions Sticker (Applicable States)'] },
+          { title: '1. Vehicle History (1–5)', items: ['1. VIN Inspection','2. Service Recalls (OASIS) Performed','3. Free VIN Checks Run (NICB + Recalls)','4. Scheduled Maintenance Performed','5. Vehicle Emissions Sticker (Applicable States)'] },
           { title: '2. Road Test (6–22)', items: ['6. Engine Starts and Idles Properly','7. Remote Start System Operation','8. Engine Accelerates and Cruises Properly/Smoothly','9. Engine Noise Normal (Cold/Hot & High/Low Speeds)','10. Auto/Manual Transmission/Transaxle Operation – Cold and Hot Shift Quality','11. Auto/Manual Transmission/Transaxle Noise Normal – Cold and Hot','12. Shift Interlock Operates Properly','13. Drive Axle/Transfer Case Operation Noise Normal','14. Clutch Operates Properly','15. Steers Normally (Response, Centering and Free Play)','16. Body and Suspension Squeaks and Rattles','17. Struts/Shocks Operate Properly','18. Brakes/ABS Operate Properly','19. Cruise Control','20. Gauges Operate Properly','21. Driver Select/Memory Profile Systems','22. No Abnormal Wind Noise'] },
           { title: '3. Vehicle Exterior (23–40)', items: ['23. No Evidence of Flood, Fire, Major or Hail Damage','24. Body Panel Inspection','25. Bumper/Fascia Inspection','26. Doors, Hood, Decklid/Tailgate and Roof Inspection','27. Doors, Hood, Decklid/Tailgate Alignment','28. Automatic/Manual Release Mechanisms, Hinges, Prop Rod/Gas Struts Operate Properly','29. Power Liftgate, Power-Sliding Door Operation','30. Grille, Trim and Roof Rack Inspection','31. Deployable Running Boards','32. Windshield, Side and Rear-Window Glass Inspection','33. Wiper Blade Replacement','34. Outside Mirror Inspection','35. Front-End Exterior Lights','36. Back-End Exterior Lights','37. Side Exterior Lights','38. Hazard Lights','39. Auto On/Off Lighting','40. Trailer Lamp Connector Operation'] },
           { title: '4. Vehicle Interior (41–96)', items: ['41. Airbags','42. Safety Belts','43. Radio, Cassette, CD and Speakers','44. Antenna','45. Alarm/Theft-Deterrent System','46. Navigation System','47. Air Conditioning System','48. Heating System','49. Defog/Defrost','50. Clock','51. Tilt/Telescopic Steering Wheel','52. Steering Column Lock','53. Steering Wheel Controls','54. Horn','55. Warning Chimes','56. Instrument Panel and Warning Lights','57. Wipers','58. Washers','59. Interior Courtesy, Dome and Map Lights','60. Manual/Power Outside Rearview Mirrors and Auto-Dimming Rearview Mirror','61. BLIS (Blind Spot Information System)','62. Rear View Camera','63. SYNC System','64. MyFord Touch','65. Active Park Assist','66. Rear Entertainment System','67. Power Outlets and Lighter','68. Ashtrays','69. Glove Box and Center Armrest/Console','70. Sun Visors, Vanity Mirror and Light','71. Adjustable Pedals (if equipped)','72. Interior Odor-Free','73. Carpet','74. Floor Mats','75. Door Trim and Door Panels','76. Headliner','77. Seat Upholstery','78. Seat and Head Restraint Adjustment','79. Folding Seats','80. Heated Seats','81. Integrated Child Safety Seats','82. Sunroof/Moonroof','83. Convertible Top','84. Door Handles and Release Mechanisms','85. Remote Entry System and Push-Button Start System','86. Door Locks','87. Child Safety Locks','88. Window Controls','89. Remote Decklid and Fuel Filler Door Release','90. Carpet, Trim and Cargo Net','91. Luggage Compartment/Cargo Area Light','92. Vehicle Jack and Tool Kit','93. Spare Tire Size/Type and Sidewall Inspection','94. Spare Tire Tread Depth/Air Pressure Inspection','95. Tire Inflator Kit','96. Emergency Trunk-Lid Release'] },
