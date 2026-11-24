@@ -422,10 +422,13 @@
               </div>
             </div>
           </div>
-          <div class="grid-3" style="margin-bottom: 12px;">
+          <div class="grid-2" style="margin-bottom: 12px;">
             <div><label class="lbl">Your Name</label><input id="bookName" type="text" placeholder="Full Name"></div>
             <div><label class="lbl">Phone Number</label><input id="bookPhone" type="tel" required placeholder="(360) 555-0199"></div>
+          </div>
+          <div class="grid-2" style="margin-bottom: 12px;">
             <div><label class="lbl">Service Address / City</label><input id="bookAddress" type="text" required placeholder="Street Address, City"></div>
+            <div><label class="lbl">Email Address</label><input id="bookEmail" type="email" placeholder="you@email.com"></div>
           </div>
           <div><label class="lbl">Notes / Symptoms</label><textarea id="bookNotes" rows="2" placeholder="Describe noises, warning lights, or parking instructions..."></textarea></div>
           <button type="submit" class="submit-btn">Confirm Quote &amp; Request Appointment</button>
@@ -1388,6 +1391,7 @@
         'REDEMPTION MOBILE SERVICE LLC — BOOKING REQUEST',
         'Customer: ' + (document.getElementById('bookName').value.trim() || '(name not given)') + ' (' + document.getElementById('bookPhone').value.trim() + ')',
         'Address: ' + document.getElementById('bookAddress').value.trim(),
+        'Email: ' + (document.getElementById('bookEmail').value.trim() || '(not given)'),
         'Date / Window: ' + document.getElementById('bookDate').value + ' • ' + selectedSlot,
         'Vehicle: ' + getVehicleLabel() + ' | VIN: ' + (document.getElementById('vinInput').value.trim() || 'N/A'),
         'Services: ' + (chosen.join(', ') || 'General Inspection'),
@@ -1561,6 +1565,7 @@
       document.getElementById('smsCustBtn').href = 'sms:3607728205?body=' + encodeURIComponent(txt);
       document.getElementById('bookName').value = document.getElementById('cRegName').value.trim();
       document.getElementById('bookPhone').value = document.getElementById('cRegPhone').value.trim();
+      document.getElementById('bookEmail').value = document.getElementById('cRegEmail').value.trim();
       showToast('Customer registration ready!');
     });
 
