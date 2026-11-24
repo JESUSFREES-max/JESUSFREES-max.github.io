@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Link Tagger — Redemption Mobile Service (private tool)</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#0f2439; color:#f1f5f9; padding:18px 14px 40px; }
+  .wrap { max-width:560px; margin:0 auto; }
+  h1 { font-size:22px; margin:6px 0 4px; color:#fbbf24; }
+  .sub { font-size:13.5px; color:#cbd5e1; line-height:1.5; margin:0 0 16px; }
+  label { display:block; font-size:13px; font-weight:700; margin:14px 0 6px; color:#e2e8f0; }
+  textarea { width:100%; min-height:84px; border-radius:10px; border:1px solid #334155; background:#1e293b; color:#f8fafc; padding:12px; font-size:14px; }
+  .btn { display:block; width:100%; margin-top:12px; padding:15px; border:0; border-radius:10px; font-size:16px; font-weight:800; cursor:pointer; }
+  .btn-make { background:#f59e0b; color:#1c1005; }
+  .btn-copy { background:#16a34a; color:#ffffff; }
+  .out { margin-top:16px; background:#020617; border:1px solid #334155; border-radius:10px; padding:12px; font-size:14px; word-break:break-all; line-height:1.55; display:none; }
+  .err { margin-top:12px; background:#450a0a; border:1px solid #7f1d1d; color:#fecaca; border-radius:10px; padding:12px; font-size:13.5px; line-height:1.5; display:none; }
+  .note { font-size:12.5px; color:#94a3b8; line-height:1.55; margin-top:18px; }
+  .toast { position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:#16a34a; color:#fff; padding:10px 18px; border-radius:999px; font-weight:700; font-size:14px; display:none; box-shadow:0 6px 20px rgba(0,0,0,.4); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🔗 Link Tagger</h1>
+  <p class="sub">Paste any Amazon product link — this strips it down and puts <strong>your</strong> tag on it (redemptionm06-20), ready to copy and share.</p>
+
+  <label for="inLink">Paste the Amazon link here</label>
+  <textarea id="inLink" placeholder="Paste the full product link from the Amazon page or app…"></textarea>
+  <button class="btn btn-make" id="btnMake" type="button">Make My Link</button>
+
+  <div class="err" id="errBox"></div>
+  <div class="out" id="outBox"></div>
+  <button class="btn btn-copy" id="btnCopy" type="button" style="display:none;">📋 Copy My Link</button>
+
+  <p class="note">Works with full product links (the ones with <em>/dp/</em> in them). Short share links (link.amazon/…) hide the product code — open the product first, then copy its full link. Reminder: your tag earns only when <em>someone else</em> buys through it — never on your own orders.</p>
+</div>
+<div class="toast" id="toast">Copied!</div>
+<script>
+  var TAG = 'redemptionm06-20';
+  var lastLink = '';
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.style.display = 'block';
+    setTimeout(function() { t.style.display = 'none'; }, 1800);
+  }
+  function extractAsin(raw) {
+    if (!raw) return null;
+    var s = raw.trim();
+    var m = s.match(/\/(?:dp|gp\/product|gp\/aw\/d)\/([A-Z0-9]{10})/i);
+    if (m) return m[1].toUpperCase();
+    m = s.match(/\b([A-Z0-9]{10})\b/i);
+    if (m && /amazon/i.test(s)) return m[1].toUpperCase();
+    if (/^[A-Z0-9]{10}$/i.test(s)) return s.toUpperCase();
+    return null;
+  }
+  document.getElementById('btnMake').addEventListener('click', function() {
+    var raw = document.getElementById('inLink').value;
+    var err = document.getElementById('errBox');
+    var out = document.getElementById('outBox');
+    var copyBtn = document.getElementById('btnCopy');
+    err.style.display = 'none'; out.style.display = 'none'; copyBtn.style.display = 'none';
+    var asin = extractAsin(raw);
+    if (!asin) {
+      err.textContent = 'Could not find a product code in that link. If it is a short link.amazon link, open the product page first and copy the full link, then paste it here.';
+      err.style.display = 'block';
+      return;
+    }
+    lastLink = 'https://www.amazon.com/dp/' + asin + '?tag=' + TAG;
+    out.textContent = lastLink;
+    out.style.display = 'block';
+    copyBtn.style.display = 'block';
+  });
+  document.getElementById('btnCopy').addEventListener('click', function() {
+    if (!lastLink) return;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(lastLink).then(function() { showToast('Copied — your tag is on it!'); }).catch(function() { fallbackCopy(); });
+    } else { fallbackCopy(); }
+  });
+  function fallbackCopy() {
+    var ta = document.createElement('textarea');
+    ta.value = lastLink; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('Copied — your tag is on it!'); } catch (e) { showToast('Long-press the link to copy'); }
+    document.body.removeChild(ta);
+  }
+</script>
+</body>
+</html>
