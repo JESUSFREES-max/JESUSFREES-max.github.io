@@ -1629,13 +1629,13 @@
       { cat: 'Maintenance', name: 'Castrol EDGE Extended Performance 0W-20 (5 QT)', desc: "🧰 From De's own toolbox — the oil De prefers to install: Fluid Titanium formula, rated up to 25,000 miles between changes. Best price found Nov 23: $33.97 at Walmart.", q: 'Castrol EDGE Extended Performance 0W-20 5 quart', asin: 'B0DGVBJFDW', img: 'https://m.media-amazon.com/images/I/61PlD1qZ5bL.jpg', fav: false },
       { cat: 'Maintenance', name: 'Castrol EDGE Extended Performance 5W-20 (5 QT)', desc: "🧰 From De's own toolbox — the oil De prefers to install: Fluid Titanium formula, rated up to 25,000 miles between changes. Best price found Nov 23: $33.97 at Walmart.", q: 'Castrol EDGE Extended Performance 5W-20 5 quart', asin: 'B00JGQM1WO', img: 'https://m.media-amazon.com/images/I/61Lt6QKbZOL.jpg', fav: false },
       { cat: 'Maintenance', name: 'Castrol EDGE Extended Performance 5W-30 (5 QT)', desc: "🧰 From De's own toolbox — the oil De prefers to install: Fluid Titanium formula, rated up to 25,000 miles between changes. Best price found Nov 23: $33.97 at Walmart.", q: 'Castrol EDGE Extended Performance 5W-30 5 quart', asin: 'B00IPS3GMI', img: 'https://m.media-amazon.com/images/I/71oHJ1mzgaL.jpg', fav: false },
-      { cat: 'Maintenance', name: 'Castrol EDGE 10W-30 (5 QT)', desc: "🧰 From De's own toolbox — the oil De prefers to install: Fluid Titanium formula (10W-30 comes in standard EDGE — no Extended Performance jug in this grade). Best price found Nov 23: $31.97 at Walmart.", q: 'Castrol EDGE 10W-30 full synthetic 5 quart', img: 'https://m.media-amazon.com/images/I/61gDXTNkq-L.jpg', fav: false },
+      { cat: 'Maintenance', name: 'Castrol EDGE 10W-30 (5 QT)', desc: "🧰 From De's own toolbox — the oil De prefers to install: Fluid Titanium formula (10W-30 comes in standard EDGE — no Extended Performance jug in this grade). Best price found Nov 23: $31.97 at Walmart.", q: 'Castrol EDGE 10W-30 full synthetic 5 quart', asin: 'B00GSQD3GI', img: 'https://m.media-amazon.com/images/I/61gDXTNkq-L.jpg', fav: false },
       { cat: 'Maintenance', name: 'Castrol GTX Diesel 15W-40 (1 GAL)', desc: "Castrol's diesel workhorse: CK-4 15W-40 for Power Stroke, Cummins & Duramax diesels — carries Ford's WSS-M2C171-F1 spec. Best price found Nov 23: $21.97 at Walmart.", q: 'Castrol GTX Diesel 15W-40 1 gallon', asin: 'B00826N7RC', img: 'https://m.media-amazon.com/images/I/71YWV5EMMuL.jpg', fav: false },
       { cat: 'Maintenance', name: 'Castrol VECTON 15W-40 Diesel (1 GAL)', desc: "Castrol's premium diesel oil: part-synthetic CK-4 15W-40 built for extended drains in hard-working diesels. Best price found Nov 23: $33.99 at Advance Auto.", q: 'Castrol VECTON 15W-40 CK-4 1 gallon', img: 'https://m.media-amazon.com/images/I/71RhcsEdQlL.jpg', fav: false },
       { cat: 'Maintenance', name: 'AMSOIL Signature Series 0W-20', desc: "Premium tier: AMSOIL Signature Series 100% synthetic — the lineup that won the 16-oil independent test, rated up to 25,000 miles in normal service. De installs it — text to book your AMSOIL oil change.", q: 'AMSOIL Signature Series 0W-20', img: 'assets/amsoil-0w20.jpg', fav: false, direct: 'sms', tag: 'PREMIUM TIER' },
       { cat: 'Maintenance', name: 'AMSOIL Signature Series 5W-20', desc: "Premium tier: AMSOIL Signature Series 100% synthetic — the lineup that won the 16-oil independent test, rated up to 25,000 miles in normal service. De installs it — text to book your AMSOIL oil change.", q: 'AMSOIL Signature Series 5W-20', img: 'assets/amsoil-5w20.jpg', fav: false, direct: 'sms', tag: 'PREMIUM TIER' },
       { cat: 'Maintenance', name: 'AMSOIL Signature Series 5W-30', desc: "Premium tier: AMSOIL Signature Series 100% synthetic — the exact grade that won the 16-oil independent test, rated up to 25,000 miles in normal service. De installs it — text to book your AMSOIL oil change.", q: 'AMSOIL Signature Series 5W-30', img: 'assets/amsoil-5w30.jpg', fav: false, direct: 'sms', tag: 'PREMIUM TIER — TEST WINNER' },
-      { cat: 'Apparel', name: 'Red Kap Mechanic Work Shirts', desc: 'Vetted pick: what dealership techs wear — soil-release ripstop.', q: 'Red Kap automotive work shirt mechanic', img: 'assets/img-redkap.jpg', fav: false }
+      { cat: 'Apparel', name: 'Red Kap Mechanic Work Shirts', desc: 'Vetted pick: what dealership techs wear — soil-release ripstop.', q: 'Red Kap automotive work shirt mechanic', asin: 'B004HV14VW', img: 'assets/img-redkap.jpg', fav: false }
     ];
     var activeShopCat = 'All';
 
@@ -1669,18 +1669,18 @@
         if (activeShopCat === 'Favorites' && !it.fav) continue;
         if (activeShopCat !== 'All' && activeShopCat !== 'Favorites' && it.cat !== activeShopCat) continue;
         var q = encodeURIComponent(it.q);
-        var amz = it.asin ? 'https://www.amazon.com/dp/' + it.asin + '?tag=' + encodeURIComponent(amazonTag) : 'https://www.amazon.com/s?k=' + q + '&tag=' + encodeURIComponent(amazonTag);
-        var hf = 'https://www.harborfreight.com/search?q=' + q;
+        var amz = it.asin ? 'https://www.amazon.com/dp/' + it.asin + '?tag=' + encodeURIComponent(amazonTag) : null;
         var eb = ebayLink(q);
+        var mainLink = amz || eb;
         var imgTag = it.img ? '<img src="' + it.img + '" alt="' + it.name + '" loading="lazy" onerror="this.style.display=\'none\'" style="width:100%; height:150px; object-fit:cover; border-radius:8px; margin-bottom:10px;">' : '';
         html += '<div class="pay-card">' +
-          (it.img ? (it.direct ? imgTag : '<a href="' + amz + '" target="_blank" rel="noopener">' + imgTag + '</a>') : '') +
+          (it.img ? (it.direct ? imgTag : '<a href="' + mainLink + '" target="_blank" rel="noopener">' + imgTag + '</a>') : '') +
           '<div><span class="pay-badge" style="background:#0f2439;">' + it.cat.toUpperCase() + '</span>' + (it.fav ? '<span class="pay-badge" style="background:#b45309; margin-left:6px;">&#9733; MECHANIC\'S FAVORITE</span>' : '') + (it.tag ? '<span class="pay-badge" style="background:#7c3aed; margin-left:6px;">' + it.tag + '</span>' : '') +
           '<div style="font-size:14px; font-weight:800; color:#0f2439; margin-top:6px;">' + it.name + '</div>' +
           '<div style="font-size:12px; color:#64748b; margin-top:3px;">' + it.desc + '</div></div>' +
           '<div class="btn-row">' +
           (it.direct === 'sms' ? '<a href="sms:+13607728205?&body=' + encodeURIComponent('Hi Redemption Mobile Service, I would like to book an oil change with ' + it.name + '. My vehicle is: ____') + '" class="src-btn" style="background:#0f766e;">&#128242; Text De to Book This Oil</a>' :
-          '<a href="' + amz + '" target="_blank" rel="noopener" class="src-btn src-amz">Amazon</a>' +
+          (amz ? '<a href="' + amz + '" target="_blank" rel="noopener" class="src-btn src-amz">Amazon</a>' : '') +
           '<span class="src-btn" style="background:#94a3b8; cursor:default;" title="Shown for price info only">Harbor Freight</span>' +
           '<a href="' + eb + '" target="_blank" rel="noopener" class="src-btn" style="background:#0f766e;">eBay</a>') +
           '</div></div>';
@@ -1716,7 +1716,7 @@
       { name: 'Prius Hybrid Cooling Fan + Dorman Filter', desc: 'Vetted pick: OEM-class fan + Dorman 926-603 washable fan filter.', q: 'Prius hybrid battery cooling fan 2010-2015', img: 'assets/img-fan-tile.jpg', store: 'amazon' },
       { name: 'Optima YellowTop DS46B24R 12V Battery', desc: 'Vetted pick: exact-fit AGM for Gen 2/3 Prius — right posts, right vent.', q: 'Optima YellowTop DS46B24R Prius battery', asin: 'B006VFEJJQ', img: 'assets/img-optima.jpg', store: 'amazon' },
       { name: 'TOPDON BT200 Battery Tester', desc: 'Vetted pick: rule out the cheap fix first — accurate CCA & charging tests.', q: 'TOPDON BT200 battery tester alternator', asin: 'B08CMPY86M', img: 'assets/img-topdon.jpg', store: 'amazon' },
-      { name: 'Salisbury Class 0 HV Glove Kit', desc: 'Vetted pick: ASTM-rated 1000V gloves with test certification. Life-safety gear.', q: 'Salisbury Class 0 insulated glove kit 1000V', img: 'assets/img-salisbury.jpg', store: 'amazon' },
+      { name: 'Salisbury Class 0 HV Glove Kit', desc: 'Vetted pick: ASTM-rated 1000V gloves with test certification. Life-safety gear.', q: 'Salisbury Class 0 insulated glove kit 1000V', asin: 'B0085C4Y4I', img: 'assets/img-salisbury.jpg', store: 'amazon' },
       { name: 'Wiha 1000V Insulated Tool Set', desc: 'Vetted pick: each tool tested to 10,000V, IEC 60900 certified.', q: 'Wiha insulated tool set 1000V 32800', asin: 'B007HGNXI6', img: 'assets/img-wiha.jpg', store: 'amazon' },
       { name: 'Lectron 40A Portable EV Charger', desc: 'Vetted pick: UL-listed J1772 Level 2 — never buy an unlisted EV charger.', q: 'Lectron portable level 2 EV charger 40 amp J1772', asin: 'B0BXP2JB64', img: 'assets/img-lectron.jpg', store: 'amazon' }
     ];
@@ -1729,16 +1729,16 @@
       for (var i = 0; i < HYBRID_ITEMS.length; i++) {
         var it = HYBRID_ITEMS[i];
         var q = encodeURIComponent(it.q);
-        var amz = it.asin ? 'https://www.amazon.com/dp/' + it.asin + '?tag=' + encodeURIComponent(amazonTag) : 'https://www.amazon.com/s?k=' + q + '&tag=' + encodeURIComponent(amazonTag);
+        var amz = it.asin ? 'https://www.amazon.com/dp/' + it.asin + '?tag=' + encodeURIComponent(amazonTag) : null;
         var eb = ebayLink(q);
-        var main = it.store === 'ebay' ? eb : amz;
+        var main = (it.store === 'ebay' || !amz) ? eb : amz;
         html += '<div class="pay-card">' +
           (it.img ? '<a href="' + main + '" target="_blank" rel="noopener sponsored"><img src="' + it.img + '" alt="' + it.name + '" loading="lazy" onerror="this.style.display=\'none\'" style="width:100%; height:150px; object-fit:cover; border-radius:8px; margin-bottom:10px;"></a>' : '') +
           '<div><span class="pay-badge" style="background:#065f46;">HYBRID</span>' +
           '<div style="font-size:14px; font-weight:800; color:#0f2439; margin-top:6px;">' + it.name + '</div>' +
           '<div style="font-size:12px; color:#64748b; margin-top:3px;">' + it.desc + '</div></div>' +
           '<div class="btn-row">' +
-          (it.noamz ? '' : '<a href="' + amz + '" target="_blank" rel="noopener sponsored" class="src-btn src-amz">Amazon</a>') +
+          (it.noamz || !amz ? '' : '<a href="' + amz + '" target="_blank" rel="noopener sponsored" class="src-btn src-amz">Amazon</a>') +
           '<a href="' + eb + '" target="_blank" rel="noopener sponsored" class="src-btn" style="background:#0f766e;">eBay</a>' +
           '</div></div>';
       }
