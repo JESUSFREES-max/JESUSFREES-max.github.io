@@ -89,6 +89,7 @@
       cursor: pointer;
       text-align: center;
     }
+    a.nav-btn { text-decoration: none; font-family: inherit; }
     .nav-btn.active {
       background: #0f2439;
       border-color: #0f2439;
@@ -265,16 +266,16 @@
 
   <!-- Main Page Toggle -->
   <nav class="nav-bar no-print" aria-label="Site Views">
-    <button id="navQuote" type="button" class="nav-btn active">Customer Quote &amp; Booking</button>
-    <button id="navInspect" type="button" class="nav-btn">Mechanic Inspections (6 Forms)</button>
-    <button id="navPay" type="button" class="nav-btn">Payments &amp; Donations</button>
-    <button id="navPortal" type="button" class="nav-btn">Portals &amp; Calendar</button>
-    <button id="navShop" type="button" class="nav-btn">Shop &amp; Gear</button>
-    <button id="navParts" type="button" class="nav-btn">Parts Finder</button>
-    <button id="navBuy" type="button" class="nav-btn">We Buy Cars</button>
-    <button id="navHybrid" type="button" class="nav-btn">Hybrid Batteries</button>
-    <button id="navResources" type="button" class="nav-btn">Free Resources</button>
-    <button id="navGallery" type="button" class="nav-btn">📸 Recent Work</button>
+    <a id="navQuote" class="nav-btn active" href="https://jesusfrees-max.github.io/">Customer Quote &amp; Booking</a>
+    <a id="navInspect" class="nav-btn" href="https://jesusfrees-max.github.io/?view=inspect">Mechanic Inspections (6 Forms)</a>
+    <a id="navPay" class="nav-btn" href="https://jesusfrees-max.github.io/?view=pay">Payments &amp; Donations</a>
+    <a id="navPortal" class="nav-btn" href="https://jesusfrees-max.github.io/?view=portal">Portals &amp; Calendar</a>
+    <a id="navShop" class="nav-btn" href="https://jesusfrees-max.github.io/?view=shop">Shop &amp; Gear</a>
+    <a id="navParts" class="nav-btn" href="https://jesusfrees-max.github.io/?view=parts">Parts Finder</a>
+    <a id="navBuy" class="nav-btn" href="https://jesusfrees-max.github.io/?view=buy">We Buy Cars</a>
+    <a id="navHybrid" class="nav-btn" href="https://jesusfrees-max.github.io/?view=hybrid">Hybrid Batteries</a>
+    <a id="navResources" class="nav-btn" href="https://jesusfrees-max.github.io/?view=resources">Free Resources</a>
+    <a id="navGallery" class="nav-btn" href="https://jesusfrees-max.github.io/?view=gallery">📸 Recent Work</a>
   </nav>
 
   <!-- VIEW 1: CUSTOMER QUOTE & BOOKING HOMEPAGE -->
@@ -1026,16 +1027,16 @@
       else { navShop.classList.add('active'); viewShop.classList.remove('hidden'); renderShop(); }
       try { history.replaceState(null, '', which === 'quote' ? location.pathname : '?view=' + which); } catch (e) {}
     }
-    navQuote.addEventListener('click', function() { switchView('quote'); });
-    navInspect.addEventListener('click', function() { switchView('inspect'); });
-    navPay.addEventListener('click', function() { switchView('pay'); });
-    navPortal.addEventListener('click', function() { switchView('portal'); });
-    document.getElementById('navShop').addEventListener('click', function() { switchView('shop'); });
-    document.getElementById('navParts').addEventListener('click', function() { switchView('parts'); });
-    document.getElementById('navBuy').addEventListener('click', function() { switchView('buy'); });
-    document.getElementById('navHybrid').addEventListener('click', function() { switchView('hybrid'); });
-    document.getElementById('navResources').addEventListener('click', function() { switchView('resources'); });
-    document.getElementById('navGallery').addEventListener('click', function() { switchView('gallery'); });
+    navQuote.addEventListener('click', function(e) { e.preventDefault(); switchView('quote'); });
+    navInspect.addEventListener('click', function(e) { e.preventDefault(); switchView('inspect'); });
+    navPay.addEventListener('click', function(e) { e.preventDefault(); switchView('pay'); });
+    navPortal.addEventListener('click', function(e) { e.preventDefault(); switchView('portal'); });
+    document.getElementById('navShop').addEventListener('click', function(e) { e.preventDefault(); switchView('shop'); });
+    document.getElementById('navParts').addEventListener('click', function(e) { e.preventDefault(); switchView('parts'); });
+    document.getElementById('navBuy').addEventListener('click', function(e) { e.preventDefault(); switchView('buy'); });
+    document.getElementById('navHybrid').addEventListener('click', function(e) { e.preventDefault(); switchView('hybrid'); });
+    document.getElementById('navResources').addEventListener('click', function(e) { e.preventDefault(); switchView('resources'); });
+    document.getElementById('navGallery').addEventListener('click', function(e) { e.preventDefault(); switchView('gallery'); });
 
 
     // ================= WE BUY CARS LOGIC =================
