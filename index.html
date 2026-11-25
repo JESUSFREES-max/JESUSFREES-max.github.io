@@ -1680,7 +1680,7 @@
           '<div style="font-size:12px; color:#64748b; margin-top:3px;">' + it.desc + '</div></div>' +
           '<div class="btn-row">' +
           (it.direct === 'sms' ? '<a href="sms:+13607728205?&body=' + encodeURIComponent('Hi Redemption Mobile Service, I would like to book an oil change with ' + it.name + '. My vehicle is: ____') + '" class="src-btn" style="background:#0f766e;">&#128242; Text De to Book This Oil</a>' :
-          (amz ? '<a href="' + amz + '" target="_blank" rel="noopener" class="src-btn src-amz">Amazon</a>' : '<span class="src-btn" style="background:#e2e8f0; color:#94a3b8; cursor:default;" title="No verified Amazon listing for this item">Amazon — Not Available</span>') +
+          (amz ? '<a href="' + amz + '" target="_blank" rel="noopener" class="src-btn src-amz">Amazon</a>' : '<span class="src-btn" style="background:#e2e8f0; color:#94a3b8; cursor:default;" title="No verified Amazon listing for this item">Amazon — No Listing Yet</span>') +
           '<span class="src-btn" style="background:#94a3b8; cursor:default;" title="Shown for price info only">Harbor Freight</span>' +
           '<a href="' + eb + '" target="_blank" rel="noopener" class="src-btn" style="background:#0f766e;">eBay</a>') +
           '</div></div>';
@@ -1738,7 +1738,7 @@
           '<div style="font-size:14px; font-weight:800; color:#0f2439; margin-top:6px;">' + it.name + '</div>' +
           '<div style="font-size:12px; color:#64748b; margin-top:3px;">' + it.desc + '</div></div>' +
           '<div class="btn-row">' +
-          (it.noamz || !amz ? '<span class="src-btn" style="background:#e2e8f0; color:#94a3b8; cursor:default;" title="No verified Amazon listing for this item">Amazon — Not Available</span>' : '<a href="' + amz + '" target="_blank" rel="noopener sponsored" class="src-btn src-amz">Amazon</a>') +
+          (it.noamz || !amz ? '<span class="src-btn" style="background:#e2e8f0; color:#94a3b8; cursor:default;" title="No verified Amazon listing for this item">Amazon — No Listing Yet</span>' : '<a href="' + amz + '" target="_blank" rel="noopener sponsored" class="src-btn src-amz">Amazon</a>') +
           '<a href="' + eb + '" target="_blank" rel="noopener sponsored" class="src-btn" style="background:#0f766e;">eBay</a>' +
           '</div></div>';
       }
