@@ -1,14 +1,14 @@
 /* Redemption Mobile Service — service worker
    Strategy: network-first for pages (site updates always show fresh),
    cache-first for static assets (icons, images, manifests). */
-var CACHE = 'rms-cache-v12';
+var CACHE = 'rms-cache-v13-tmlogo';
 var CORE = [
   '/manifest-customer.json',
   '/manifest-contractor.json',
-  '/assets/icon-192.png',
-  '/assets/icon-512.png',
-  '/assets/apple-touch-icon.png',
-  '/assets/logo.jpg'
+  '/assets/icon-192-tm.png',
+  '/assets/icon-512-tm.png',
+  '/assets/apple-touch-icon-tm.png',
+  '/assets/logo-tm.png'
 ];
 
 self.addEventListener('install', function (e) {
